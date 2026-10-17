@@ -1,0 +1,62 @@
+/* Account management is secondary to transport work. Reuse the shared palette. */
+.co-breadcrumb{display:flex;align-items:center;gap:9px;min-width:0;flex-wrap:wrap}
+.co-breadcrumb button{background:none;border:0;color:var(--co-muted);padding:8px 0;font:inherit;cursor:pointer}
+.co-breadcrumb button:hover{color:var(--co-accent);text-decoration:underline;text-underline-offset:4px}
+.co-sidebar .co-settings-link{min-height:44px;font-size:14px;padding:10px 12px}
+.co-sidebar .co-settings-link.active,.co-sidebar .co-account-link.active{background:#dceadd;color:#235d44}
+.co-sidebar .co-account-link{display:flex;width:100%;padding:10px 6px;text-align:left;gap:10px}
+.co-account-link>span:nth-child(2){flex:1;min-width:0}
+.co-account-link>svg{flex-shrink:0}
+.co-account-link .co-role{font-weight:400}
+.co-section-home{max-width:980px}
+.co-section-home h1,.co-members h1{font-size:28px;font-weight:650;line-height:1.4;margin:0 0 8px}
+.co-section-home p,.co-members p{color:var(--co-muted);line-height:1.8}
+.co-destination-list{border-top:1px solid var(--co-line);margin-top:24px}
+.co-destination-list>button{width:100%;display:flex;gap:20px;align-items:center;padding:26px 10px;border:0;border-bottom:1px solid var(--co-line);background:none;color:var(--co-ink);text-align:left;font:inherit}
+.co-destination-list>button:hover{background:#eaf0ea}
+.co-destination-list>button>span{display:grid;gap:7px;flex:1}
+.co-destination-list strong{font-size:17px;font-weight:600}
+.co-destination-list small{font-size:14px;color:var(--co-muted);line-height:1.65}
+.co-destination-list svg{flex-shrink:0;color:var(--co-accent)}
+.co-account-summary{padding:24px 0;border-top:1px solid var(--co-line)}
+.co-account-summary h2{font-size:20px;margin:0}.co-account-summary p{margin:5px 0}
+.co-account-summary .co-avatar{width:48px;height:48px;font-size:21px}
+.co-account-summary dl{margin-top:28px;display:grid;gap:18px}
+.co-account-summary dl>div{display:grid;grid-template-columns:110px 1fr;gap:16px}
+.co-account-summary dt{color:var(--co-muted)}.co-account-summary dd{margin:0;overflow-wrap:anywhere}
+.co-account-summary .co-note{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:14px}
+.co-logout{margin-top:26px}
+.co-form-page{display:grid;grid-template-columns:minmax(0,580px) minmax(220px,1fr);gap:48px;align-items:start;max-width:1000px}
+.co-member-form{display:grid;gap:22px;padding:26px;background:white;border:1px solid var(--co-line);border-radius:12px;min-width:0}
+.co-member-form h2{margin:0;font-size:19px}
+.co-member-form label,.co-field,.co-grant-form label{display:grid;gap:8px;font-size:14px;font-weight:600}
+.co-member-form input,.co-member-form select,.co-grant-form select{font:inherit;font-weight:400;width:100%;min-width:0;padding:11px 12px;border:1px solid #baccc1;border-radius:7px;background:white;color:var(--co-ink);min-height:44px}
+.co-member-form small,.co-field small{font-size:12px;line-height:1.6;font-weight:400;color:#5d706b}
+.co-password-input{position:relative;display:flex;align-items:center}
+.co-password-input input{padding-right:50px!important;width:100%;min-width:0}
+.co-password-input button{position:absolute;right:2px;top:2px;bottom:2px;width:44px;display:grid;place-items:center;padding:0;border:0;border-radius:6px;background:transparent;color:#4a6659;cursor:pointer}
+.co-password-input button:hover{background:#eaf0ea}
+.co-form-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.co-form-guidance{padding:22px 0;color:var(--co-muted)}
+.co-form-guidance h2{font-size:18px;color:var(--co-ink);margin:16px 0 10px}
+.co-form-guidance p{font-size:14px;max-width:38ch}
+.co-members .co-member-list{padding:0;margin-top:22px}
+.co-members .pl-tabs{margin-bottom:20px}.co-members .co-member-audit{padding:24px}
+.co-members .co-audit{max-height:none}.co-members .co-audit time,.co-members .co-audit small{color:#5d706b;font-size:13px}
+.co-member-summary{display:flex;align-items:flex-start;gap:18px;padding:26px 0;border-top:1px solid var(--co-line);border-bottom:1px solid var(--co-line)}
+.co-member-summary>div{flex:1}.co-member-summary h2{margin:0;font-size:20px}.co-member-summary p{margin:7px 0}.co-member-summary small{margin-left:14px;color:#5d706b}
+.co-member-status{display:inline-block;font-size:13px;color:#246853}.co-member-status.inactive{color:#8c4b37}
+.co-members .co-member-scopes{padding:24px;margin-top:28px}.co-grant-form{display:flex;gap:16px;align-items:flex-end;margin-top:25px}.co-grant-form label{flex:1;min-width:0}
+.co-confirm-inline{margin:24px 0;padding:24px;background:#f9f1e7;border:1px solid #e7d6bf;border-radius:10px}.co-confirm-inline h2{font-size:18px;margin:0 0 8px}
+.co-password-form{max-width:520px}
+.co-auth-layout{background:#f8faf7}.co-auth-layout .co-intro{background:#e8efe9;color:#243f35;padding:52px clamp(32px,5vw,80px);justify-content:space-between;min-height:100dvh}
+.co-auth-layout .co-intro:after{display:none}.co-auth-layout .co-intro .co-brand svg{color:#246853}.co-auth-layout .co-intro .co-brand span{color:#52695b;border-color:#bcccbf}
+.co-auth-layout .co-auth-story{margin:70px 0}.co-auth-layout .co-intro h1{font-size:clamp(32px,3.2vw,48px);font-weight:650;line-height:1.5;letter-spacing:-.03em;color:#243f35;margin:0 0 25px}.co-auth-layout .co-intro p{font-size:16px;color:#4e6859;line-height:1.9}
+.co-auth-route{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid #c4d2c5;font-size:14px;color:#3c5f4c}.co-auth-route svg{width:17px}.co-auth-layout .co-intro>small{color:#52695b;font-size:13px;line-height:1.8}
+.co-auth-layout .co-login{width:min(400px,calc(100% - 48px));padding:48px 0}.co-auth-layout .co-login h2{font-size:28px;font-weight:650;letter-spacing:-.02em}.co-auth-layout .co-login>p{color:#5d706b}.co-auth-layout .co-login form{gap:22px}
+.co-login-help{display:block;margin:18px 0;padding:8px 0;border:0;background:none;color:#246853;font-size:14px;cursor:pointer;text-align:left}.co-login-help:hover{text-decoration:underline;text-underline-offset:4px}
+.co-login-help-content{padding:16px 18px;background:#edf2ed;border-radius:8px;font-size:13px;color:#344e42;line-height:1.7}.co-login-help-content p{margin:8px 0 0}
+.co-login-demo{margin-top:34px;padding-top:24px;border-top:1px solid #dce4df;display:grid;gap:10px;color:#5d706b;font-size:13px}.co-login-demo a{display:flex;align-items:center;gap:10px;color:#246853;font-weight:600;font-size:14px;text-decoration:none}.co-login-demo a:hover{text-decoration:underline;text-underline-offset:4px}.co-login-demo small{font-size:12px}.co-auth-layout .co-login-note{border:0;padding:0;margin-top:32px;color:#5d706b}
+.co-entry :is(a,button,input):focus-visible{outline:3px solid #89b29d;outline-offset:3px}.co-shell input,.co-entry input{caret-color:#246853}
+@media(max-width:1000px){.co-form-page{gap:24px;grid-template-columns:minmax(0,1fr) 240px}.co-auth-layout .co-intro{padding:40px}.co-auth-route{gap:10px}}
+@media(max-width:700px){.co-breadcrumb{font-size:12px;gap:5px}.co-top>span:last-child{display:none}.co-sidebar .co-settings-link{padding:8px 10px}.co-sidebar .co-account-link{width:auto;flex:1}.co-sidebar-bottom .co-demo-entry{width:100%;margin:0}.co-section-home h1,.co-members h1{font-size:25px}.co-form-page{grid-template-columns:1fr;gap:12px}.co-member-form{padding:20px;gap:20px}.co-form-guidance{padding:10px 0}.co-member-summary{flex-wrap:wrap}.co-member-summary>div{flex-basis:70%}.co-grant-form{flex-direction:column;align-items:stretch}.co-account-summary dl>div{grid-template-columns:90px 1fr;gap:10px}.co-account-summary .co-note{align-items:flex-start}.co-account-summary .co-note svg{flex-shrink:0;margin-top:4px}.co-destination-list>button{padding:22px 2px;gap:14px}.co-destination-list small{font-size:13px}.co-auth-layout .co-intro{min-height:0;padding:24px}.co-auth-layout .co-auth-story{margin:26px 0 0}.co-auth-layout .co-intro h1{font-size:27px;margin-bottom:12px}.co-auth-layout .co-intro p{font-size:14px;margin:0}.co-auth-layout .co-auth-route,.co-auth-layout .co-intro>small{display:none}.co-auth-layout .co-login{padding:28px 0 36px}.co-members .co-member-scopes{padding:18px}.co-members .pl-filters{flex-wrap:wrap}.co-member-summary small{display:block;margin:8px 0}.co-password-form{max-width:none}}

@@ -1,0 +1,1002 @@
+{
+  "version": "0.1",
+  "status": "proposed_contract",
+  "fields": [
+    {
+      "entity": "shipment",
+      "field": "id",
+      "label": "运输批次ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "不可变内部ID；不能用提单号代替",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "booking_reference",
+      "label": "订舱参考号",
+      "type": "string",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "与提单号至少提供一个，否则列为资料待补",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "bill_of_lading_reference",
+      "label": "提单参考号",
+      "type": "string",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "同一提单可关联多个柜，不作为唯一主键",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "carrier",
+      "label": "船公司",
+      "type": "string",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "用于规则适用性；缺失时禁止自动套公开免费期",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "vessel_name",
+      "label": "船名",
+      "type": "string",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "与航次、运输调用共同核对",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "voyage",
+      "label": "航次",
+      "type": "string",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "保留来源值；同名船航次不能合并",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "pol_unlocode",
+      "label": "起运港",
+      "type": "string",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "按主数据核对，不可用目的港替代缺失值",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "pod_unlocode",
+      "label": "目的港",
+      "type": "string",
+      "required": "必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "5位UN/LOCODE，并核对海港功能1",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "timezone",
+      "label": "业务时区",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "有效IANA时区，本示例Asia/Shanghai",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "team",
+      "label": "负责团队",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "业务归属，不代表权限",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "owner",
+      "label": "运输负责人",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "业务跟进人，不自动推断事故归责",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "is_demo",
+      "label": "模拟标识",
+      "type": "boolean",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "导入批次明确模拟或真实，禁止混合",
+      "enum": null
+    },
+    {
+      "entity": "shipment",
+      "field": "lifecycle",
+      "label": "关单状态",
+      "type": "string",
+      "required": "系统派生",
+      "source": "LOCAL_DESIGN",
+      "validation": "open/close_eligible/closed；需人工关闭操作",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "id",
+      "label": "本次柜子ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "本次运输身份；柜号可在不同批次复用",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "shipment_id",
+      "label": "运输批次关联",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "外键必须存在",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "container_number",
+      "label": "柜号",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "正式数据需ISO 6346格式与校验位检查；模拟只能使用DEMO-前缀",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "equipment_type",
+      "label": "柜型",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "示例DRY40HC；柜型与ISOEquipmentCode另做适配，勿混用",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "warehouse",
+      "label": "目的仓",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "本示例DEMO-WH-DG，不冒用真实仓库",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "owner",
+      "label": "柜子跟进人",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "负责人可与运输负责人不同",
+      "enum": null
+    },
+    {
+      "entity": "shipment_container",
+      "field": "physical_stage",
+      "label": "实际物流阶段",
+      "type": "enum",
+      "required": "系统派生",
+      "source": "LOCAL_DESIGN",
+      "validation": "仅采已确认实际节点，不从ETA推导",
+      "enum": "physical_stage"
+    },
+    {
+      "entity": "shipment_container",
+      "field": "readiness",
+      "label": "当前可提判断",
+      "type": "enum",
+      "required": "系统派生",
+      "source": "LOCAL_DESIGN",
+      "validation": "卸船实际+四项clear+未出闸；有blocked优先blocked",
+      "enum": "readiness"
+    },
+    {
+      "entity": "milestone_event",
+      "field": "id",
+      "label": "节点内部ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "不可变",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "shipment_id",
+      "label": "运输批次关联",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "船舶节点可属于批次；须核对船名航次港口及运输调用",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "container_trip_id",
+      "label": "本次柜子关联",
+      "type": "string",
+      "required": "条件必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "设备及仓库节点必须关联柜子；单证/船舶可为空",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "milestone",
+      "label": "内部节点",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "由节点映射生成；不满足映射条件则UNMAPPED",
+      "enum": "milestone"
+    },
+    {
+      "entity": "milestone_event",
+      "field": "classifier",
+      "label": "计划预计实际",
+      "type": "enum",
+      "required": "必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "保持PLN/EST/ACT区分",
+      "enum": "classifier"
+    },
+    {
+      "entity": "milestone_event",
+      "field": "occurred_at",
+      "label": "发生或预测时刻",
+      "type": "datetime",
+      "required": "必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "ISO8601含偏移；保存原字符串并规范化UTC",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "source_created_at",
+      "label": "外部创建时刻",
+      "type": "datetime",
+      "required": "选填",
+      "source": "DCSA_SAMPLE",
+      "validation": "metadata.eventCreatedDateTime；不是本系统接收时刻",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "received_at",
+      "label": "系统收到时刻",
+      "type": "datetime",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "导入或接口实际收到时刻",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "location",
+      "label": "事件地点",
+      "type": "string",
+      "required": "条件必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "海港节点须匹配该航段目的港；仓库/堆场可用内部ID",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "facility_id",
+      "label": "设施代码",
+      "type": "string",
+      "required": "条件必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "还空须匹配还柜指令中的指定堆场；不以港口大区域替代设施",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "empty_indicator",
+      "label": "空重标识",
+      "type": "string",
+      "required": "条件必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "设备出闸重箱LADEN；还柜空箱EMPTY",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "mode_of_transport",
+      "label": "运输方式",
+      "type": "string",
+      "required": "条件必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "船舶节点及卸船必须明确VESSEL；不能把卡车卸货映射成卸船",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "is_transshipment",
+      "label": "是否中转",
+      "type": "boolean",
+      "required": "条件必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "卸船映射到目的进口卸船必须明确false；未知则待确认",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "external_code",
+      "label": "外部原代码",
+      "type": "string",
+      "required": "外部事件必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "保留原始事件类别和代码，内部人工节点可为空",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "source_id",
+      "label": "来源关联",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "来源ID必须存在",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "source_event_id",
+      "label": "来源事件ID",
+      "type": "string",
+      "required": "条件必填",
+      "source": "DCSA_SAMPLE",
+      "validation": "外部source_id+source_event_id唯一；缺失时不自动重复合并",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "raw_reference",
+      "label": "原始记录引用",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "记录文件/批次/索引或原文存储位置",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "supersedes_event_id",
+      "label": "修订前节点",
+      "type": "string",
+      "required": "选填",
+      "source": "LOCAL_DESIGN",
+      "validation": "修订链保留；旧事件不删除",
+      "enum": null
+    },
+    {
+      "entity": "milestone_event",
+      "field": "validity",
+      "label": "节点有效性",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "accepted/quarantined/superseded；矛盾节点进入人工确认",
+      "enum": null
+    },
+    {
+      "entity": "release_condition",
+      "field": "id",
+      "label": "条件ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "不可变",
+      "enum": null
+    },
+    {
+      "entity": "release_condition",
+      "field": "container_trip_id",
+      "label": "本次柜子",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "外键存在",
+      "enum": null
+    },
+    {
+      "entity": "release_condition",
+      "field": "kind",
+      "label": "条件类型",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "每柜四项；默认unknown",
+      "enum": "release_kind"
+    },
+    {
+      "entity": "release_condition",
+      "field": "status",
+      "label": "确认结果",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "unknown未知/pending办理中/clear明确满足/blocked明确限制",
+      "enum": "release_status"
+    },
+    {
+      "entity": "release_condition",
+      "field": "confirmed_at",
+      "label": "确认时刻",
+      "type": "datetime",
+      "required": "条件必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "status非unknown需记录确认时刻",
+      "enum": null
+    },
+    {
+      "entity": "release_condition",
+      "field": "evidence",
+      "label": "确认依据",
+      "type": "string",
+      "required": "条件必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "clear/blocked必须有来源；other_hold=clear需明确无其他限制，不能靠空值",
+      "enum": null
+    },
+    {
+      "entity": "release_condition",
+      "field": "source_id",
+      "label": "来源",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "来源ID存在",
+      "enum": null
+    },
+    {
+      "entity": "release_condition",
+      "field": "revision",
+      "label": "确认版本",
+      "type": "integer",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "保留撤销或新增hold历史；旧放行不覆盖更新限制",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "id",
+      "label": "任务ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "每柜最多一个有效提货任务",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "container_trip_id",
+      "label": "本次柜子",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "外键存在",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "haulier",
+      "label": "拖车服务商",
+      "type": "string",
+      "required": "分派必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "模拟服务商用DEMO-前缀",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "owner",
+      "label": "执行跟进人",
+      "type": "string",
+      "required": "分派必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "可与柜子跟进人不同",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "appointment_at",
+      "label": "预约提柜时刻",
+      "type": "datetime",
+      "required": "预约必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "预约为计划安排，不能视为实际出闸",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "empty_return_facility",
+      "label": "指定还柜设施",
+      "type": "string",
+      "required": "还柜确认必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "与还柜指令设施相符",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "next_action",
+      "label": "下一步",
+      "type": "string",
+      "required": "未完成必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "可操作动作与负责人",
+      "enum": null
+    },
+    {
+      "entity": "pickup_task",
+      "field": "status",
+      "label": "任务阶段",
+      "type": "enum",
+      "required": "系统派生",
+      "source": "LOCAL_DESIGN",
+      "validation": "除draft/assigned/scheduled/cancelled，进度从有效实际节点派生",
+      "enum": "task_status"
+    },
+    {
+      "entity": "deadline",
+      "field": "id",
+      "label": "期限ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "不可变",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "container_trip_id",
+      "label": "本次柜子",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "外键存在",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "kind",
+      "label": "期限类型",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "堆存/滞港/滞箱/合并/内部SLA分别记录",
+      "enum": "deadline_kind"
+    },
+    {
+      "entity": "deadline",
+      "field": "rule_id",
+      "label": "规则关联",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "规则及版本明确；禁止叠加合并与分开D&D",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "start_milestone",
+      "label": "开始节点",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "仅实际节点启动计时",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "end_milestone",
+      "label": "结束节点",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "port_storage=PORT_GATE_OUT；combined_dd=EMPTY_RETURN",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "precision",
+      "label": "精度",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "只有日期就date；有明确截止时刻才instant",
+      "enum": "precision"
+    },
+    {
+      "entity": "deadline",
+      "field": "due_date",
+      "label": "最后免费日期",
+      "type": "date",
+      "required": "date且已确认必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "港口当地日期，含当日；对应due_at为空；未确认期限允许为空并待补",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "due_at",
+      "label": "精确截止时刻",
+      "type": "datetime",
+      "required": "instant且已确认必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "含偏移；对应due_date为空；未确认期限为空并显示待确认",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "timezone",
+      "label": "计时业务时区",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "有效IANA时区",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "basis_kind",
+      "label": "依据性质",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "真实经确认confirmed/公开推算reference/模拟确认synthetic",
+      "enum": "basis_kind"
+    },
+    {
+      "entity": "deadline",
+      "field": "evidence",
+      "label": "确认或计算依据",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "记录来源、计算输入与优先级；reference不显示为合同确定超期",
+      "enum": null
+    },
+    {
+      "entity": "deadline",
+      "field": "state",
+      "label": "期限风险状态",
+      "type": "enum",
+      "required": "系统派生",
+      "source": "LOCAL_DESIGN",
+      "validation": "按规则和固定观察时刻计算；完成后历史晚完成仍保留",
+      "enum": "deadline_state"
+    },
+    {
+      "entity": "exception",
+      "field": "id",
+      "label": "异常ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "不可变",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "container_trip_id",
+      "label": "本次柜子",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "外键存在",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "type",
+      "label": "异常类型",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "放行/费用/操作/数据等原因",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "trigger_reference",
+      "label": "触发依据",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "节点、期限或人工来源",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "owner",
+      "label": "处理人",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "处理责任不等于致因归责",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "next_action",
+      "label": "下一步",
+      "type": "string",
+      "required": "未结必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "明确动作",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "due_at",
+      "label": "处理截止",
+      "type": "datetime",
+      "required": "选填",
+      "source": "LOCAL_DESIGN",
+      "validation": "与费用期限分别记录",
+      "enum": null
+    },
+    {
+      "entity": "exception",
+      "field": "status",
+      "label": "处理状态",
+      "type": "enum",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "resolved/waived需close_note",
+      "enum": "exception_status"
+    },
+    {
+      "entity": "exception",
+      "field": "close_note",
+      "label": "关闭说明",
+      "type": "string",
+      "required": "结案必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "处理结果或批准的豁免说明",
+      "enum": null
+    },
+    {
+      "entity": "source",
+      "field": "id",
+      "label": "来源ID",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "全局唯一",
+      "enum": null
+    },
+    {
+      "entity": "source",
+      "field": "kind",
+      "label": "来源类型",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "official_simulated/official_code/official_master/public_reference_rule/public_terms/proposed_design/synthetic",
+      "enum": null
+    },
+    {
+      "entity": "source",
+      "field": "url",
+      "label": "来源URL",
+      "type": "string",
+      "required": "公开资料必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "真实人工记录可用原文/文件引用",
+      "enum": null
+    },
+    {
+      "entity": "source",
+      "field": "version",
+      "label": "来源版本",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "固定提交/发布版/规则生效日/内部版本",
+      "enum": null
+    },
+    {
+      "entity": "source",
+      "field": "scope",
+      "label": "使用范围",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "来源支持什么、缺失什么",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "id",
+      "label": "操作ID",
+      "type": "string",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "不可变",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "entity_id",
+      "label": "目标对象ID",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "定位业务对象",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "actor",
+      "label": "操作者",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "本地单用户可固定local-user",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "occurred_at",
+      "label": "操作时刻",
+      "type": "datetime",
+      "required": "系统必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "含偏移",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "action",
+      "label": "操作类型",
+      "type": "string",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "create/update/import/confirm/close",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "before_after",
+      "label": "变更前后",
+      "type": "object",
+      "required": "必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "敏感内容按访问权限保存；回看依据",
+      "enum": null
+    },
+    {
+      "entity": "audit_log",
+      "field": "import_batch_id",
+      "label": "导入批次",
+      "type": "string",
+      "required": "导入必填",
+      "source": "LOCAL_DESIGN",
+      "validation": "可定位错误行及原文件",
+      "enum": null
+    }
+  ],
+  "enums": {
+    "classifier": [
+      "PLN",
+      "EST",
+      "ACT"
+    ],
+    "release_kind": [
+      "customs",
+      "carrier",
+      "terminal",
+      "other_hold"
+    ],
+    "release_status": [
+      "unknown",
+      "pending",
+      "clear",
+      "blocked"
+    ],
+    "deadline_kind": [
+      "port_storage",
+      "demurrage",
+      "detention",
+      "combined_dd",
+      "internal_sla"
+    ],
+    "basis_kind": [
+      "confirmed",
+      "reference",
+      "synthetic"
+    ],
+    "precision": [
+      "date",
+      "instant"
+    ],
+    "task_status": [
+      "draft",
+      "assigned",
+      "scheduled",
+      "picked_up",
+      "delivered",
+      "empty_returned",
+      "cancelled"
+    ],
+    "exception_status": [
+      "open",
+      "in_progress",
+      "resolved",
+      "waived"
+    ],
+    "physical_stage": [
+      "in_transit",
+      "arrived",
+      "discharged",
+      "gate_out",
+      "warehouse_signed",
+      "empty_returned"
+    ],
+    "readiness": [
+      "not_applicable",
+      "pending_confirmation",
+      "blocked",
+      "ready",
+      "pickup_completed"
+    ],
+    "deadline_state": [
+      "not_started",
+      "pending_confirmation",
+      "safe",
+      "near",
+      "overdue",
+      "ended_on_time",
+      "ended_late"
+    ],
+    "milestone": [
+      "VESSEL_DEPARTURE",
+      "VESSEL_ARRIVAL",
+      "DISCHARGED",
+      "LOADED",
+      "PORT_GATE_OUT",
+      "EMPTY_RETURN",
+      "WAREHOUSE_ARRIVAL",
+      "WAREHOUSE_SIGNED",
+      "CUSTOMS_RELEASED",
+      "TERMINAL_AVAILABLE",
+      "CUSTOMS_HOLD",
+      "DOCUMENT_UPDATE",
+      "UNMAPPED"
+    ]
+  },
+  "constraints": [
+    "shipment_id+container_number唯一",
+    "每柜每种可提条件保留历史及当前版本",
+    "source_id+source_event_id在事件导入范围唯一",
+    "状态为派生字段，禁止台账导入直接覆盖",
+    "真实库与模拟库分开；不以模拟凭据作真实确认"
+  ]
+}

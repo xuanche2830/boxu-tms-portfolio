@@ -1,0 +1,97 @@
+{
+  "version": "0.1",
+  "as_of": "2026-10-13T09:00:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "near_calendar_days": 1,
+  "rules": [
+    {
+      "id": "REF-YTN-STORAGE-7-v1",
+      "kind": "port_storage",
+      "start": "DISCHARGED",
+      "end": "PORT_GATE_OUT",
+      "free_days": 7,
+      "start_day_inclusive": true,
+      "calendar": "calendar_days",
+      "source": "MAERSK_RULE",
+      "basis_kind": "reference",
+      "applicability": "盐田、普通干货整柜；演示40HC；实际每票另确认"
+    },
+    {
+      "id": "REF-CN-COMBINED-7-v1",
+      "kind": "combined_dd",
+      "start": "DISCHARGED",
+      "end": "EMPTY_RETURN",
+      "free_days": 7,
+      "start_day_inclusive": true,
+      "calendar": "calendar_days",
+      "source": "MAERSK_RULE",
+      "basis_kind": "reference",
+      "applicability": "该公开华南中国大陆进口规则范围内干柜，具体合同另核对"
+    },
+    {
+      "id": "DEMO-SEPARATE-DETENTION-3-v1",
+      "kind": "detention",
+      "start": "PORT_GATE_OUT",
+      "end": "EMPTY_RETURN",
+      "free_days": 3,
+      "start_day_inclusive": true,
+      "calendar": "calendar_days",
+      "source": "DEMO",
+      "basis_kind": "synthetic",
+      "applicability": "仅对比模拟：独立还柜3天，不代表真实船公司条款"
+    }
+  ],
+  "semantics": {
+    "readiness": "未出闸且卸船ACT有效；四项clear为ready；任何blocked为blocked；其余pending_confirmation。出闸后pickup_completed，未卸船not_applicable。",
+    "physical_stage": "按有效ACT节点判断；有时间矛盾或关键前置缺失时不强行补齐，挂数据异常。船到港可关联多柜，但不是卸船。",
+    "last_free_date": "起始当地日期+free_days-1；只在实际开始已确认后推算。confirmed来源优先于reference，冲突不覆盖而显示待确认。",
+    "date_risk": "未结束且起始明确：due_date-观察当地日期<0为overdue；0或1为near；>1为safe。日期当天全年日有效，到次日00:00才超期。",
+    "instant_risk": "as_of>due_at才超期；near阈值为24小时；不得把date强转为已确认00:00时刻。",
+    "missing_deadline": "适用计时已开始但期限未知：pending_confirmation；计时尚未开始：not_started。",
+    "finished_clock": "结束节点已确认则无当前催办预警；按结束当地日/时刻与期限比较保留ended_on_time或ended_late。",
+    "reference_risk": "公开推算只能标记reference_near/reference_overdue，不计 confirmed_overdue，不能称为真实费用。synthetic仅在模拟模式作为预期确认值。",
+    "combined_vs_separate": "同一运输柜同一D&D方案只选combined或demurrage+detention；port_storage可独立并存。",
+    "eta_revision": "按来源可信级、来源版本/修订链、source_created_at、received_at依次选择；发生时间是预测目标，不能取其最大值作为最新。冲突待确认。",
+    "deduplication": "相同来源+事件ID且内容相同幂等；同ID内容不同挂冲突，不覆盖；无ID不靠时间和柜号自动删除。",
+    "close_shipment": "各柜必需实际节点完整（提柜、签收、还空），无未结异常；仅满足close_eligible，人工close后closed并留审计。迟到历史不自动抹除。"
+  },
+  "dashboard_metrics": [
+    {
+      "id": "actual_arrived_not_picked",
+      "label": "实际到港未提",
+      "grain": "container_trip_id",
+      "filter": "有效目的港VESSEL_ARRIVAL ACT且无有效PORT_GATE_OUT ACT"
+    },
+    {
+      "id": "ready_unappointed",
+      "label": "可提未预约",
+      "grain": "container_trip_id",
+      "filter": "readiness=ready且有效任务appointment_at为空"
+    },
+    {
+      "id": "confirmed_near",
+      "label": "确认期限临期",
+      "grain": "container_trip_id",
+      "filter": "至少一个活动适用期限near，依据confirmed；模拟库接受synthetic"
+    },
+    {
+      "id": "confirmed_overdue",
+      "label": "确认期限超期",
+      "grain": "container_trip_id",
+      "filter": "至少一个活动适用期限overdue，依据confirmed；模拟库接受synthetic"
+    },
+    {
+      "id": "pending_confirmation",
+      "label": "关键信息待确认",
+      "grain": "container_trip_id",
+      "filter": "活动期限pending_confirmation，或卸船未提时必需放行条件unknown"
+    },
+    {
+      "id": "delivered_not_returned",
+      "label": "已签收未还空柜",
+      "grain": "container_trip_id",
+      "filter": "WAREHOUSE_SIGNED ACT且无EMPTY_RETURN ACT"
+    }
+  ],
+  "metric_note": "预警类别可重叠；各类别按柜子ID去重，不把类别之和当总柜数；演示与真实统计完全分开"
+}

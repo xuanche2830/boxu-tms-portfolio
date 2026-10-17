@@ -1,0 +1,82 @@
+{
+  "version": "0.1",
+  "mode": "preview_then_confirm",
+  "sheet_names": {
+    "ledger": "台账导入",
+    "events": "节点导入",
+    "releases": "放行导入",
+    "deadlines": "期限导入"
+  },
+  "headers": {
+    "ledger": [
+      "shipment_id",
+      "container_trip_id",
+      "container_number",
+      "equipment_type",
+      "pod_unlocode",
+      "timezone",
+      "warehouse",
+      "team",
+      "owner",
+      "booking_reference",
+      "bill_of_lading_reference",
+      "is_demo"
+    ],
+    "events": [
+      "shipment_id",
+      "container_trip_id",
+      "milestone",
+      "classifier",
+      "occurred_at",
+      "source_created_at",
+      "location",
+      "facility_id",
+      "empty_indicator",
+      "mode_of_transport",
+      "is_transshipment",
+      "source_id",
+      "source_event_id",
+      "raw_reference"
+    ],
+    "releases": [
+      "container_trip_id",
+      "kind",
+      "status",
+      "confirmed_at",
+      "evidence",
+      "source_id"
+    ],
+    "deadlines": [
+      "container_trip_id",
+      "kind",
+      "rule_id",
+      "precision",
+      "due_date",
+      "due_at",
+      "timezone",
+      "basis_kind",
+      "evidence"
+    ]
+  },
+  "rules": [
+    "一行台账对应一个运输柜；shipment_id共享实现同票多柜",
+    "空白选填值转null；不把null写成0或已放行",
+    "阶段/可提/超期/关单属于派生状态，不接受导入覆盖",
+    "台账冲突不得静默覆盖；同ID差异显示预览和逐项确认",
+    "日期只能YYYY-MM-DD；时间须ISO8601含偏移",
+    "导入记录received_at由系统生成，不把source_created_at作为接收时刻",
+    "错误逐行列出，确认前不写业务库",
+    "四项放行分别输入；未知项默认unknown",
+    "公开reference免费期推算与confirmed最后免费日分栏，不自动升级确认",
+    "演示DEMO-柜号只允许模拟模式；正式输入执行柜号格式/校验位检查"
+  ],
+  "preview_error_fields": [
+    "sheet",
+    "row",
+    "field",
+    "value",
+    "error_code",
+    "message",
+    "suggested_fix"
+  ]
+}

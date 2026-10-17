@@ -1,0 +1,454 @@
+{
+  "version": "0.1",
+  "status": "executed_19_scenarios_C18_rule_layer",
+  "as_of": "2026-10-13T09:00:00+08:00",
+  "base_fixture_expected_dashboard_counts": {
+    "total_containers": 18,
+    "actual_arrived_not_picked": 12,
+    "ready_unappointed": 6,
+    "confirmed_near": 2,
+    "confirmed_overdue": 1,
+    "pending_confirmation": 2,
+    "delivered_not_returned": 1
+  },
+  "scenarios": [
+    {
+      "id": "C01",
+      "title": "只有ETA，未实际到港",
+      "container_trip_ids": [
+        "T-01"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "in_transit",
+        "readiness": "not_applicable",
+        "dashboard_memberships": [],
+        "deadline_states": {
+          "port_storage": "not_started",
+          "combined_dd": "not_started"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "核实船期，等待实际到港"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C02",
+      "title": "船到港，柜子尚未卸船",
+      "container_trip_ids": [
+        "T-02"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "arrived",
+        "readiness": "not_applicable",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked"
+        ],
+        "deadline_states": {
+          "port_storage": "not_started",
+          "combined_dd": "not_started"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "确认卸船计划，不开始免费期计时"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C03",
+      "title": "已卸船，清关办理中",
+      "container_trip_ids": [
+        "T-03"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "pending_confirmation",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked"
+        ],
+        "deadline_states": {
+          "port_storage": "safe",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "跟进清关办理结果"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C04",
+      "title": "已卸船，船公司放货受限",
+      "container_trip_ids": [
+        "T-04"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "blocked",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked"
+        ],
+        "deadline_states": {
+          "port_storage": "safe",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "核实船公司放货条件并解除限制"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C05",
+      "title": "四项已确认，可提未预约",
+      "container_trip_ids": [
+        "T-05"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "ready",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked",
+          "ready_unappointed"
+        ],
+        "deadline_states": {
+          "port_storage": "safe",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "分派拖车并预约提柜"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C06",
+      "title": "已预约，尚未实际提柜",
+      "container_trip_ids": [
+        "T-06"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "ready",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked"
+        ],
+        "deadline_states": {
+          "port_storage": "safe",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "执行14点预约，等待实际出闸"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C07",
+      "title": "日期截止当日临期，尚未超期",
+      "container_trip_ids": [
+        "T-07"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "ready",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked",
+          "ready_unappointed",
+          "confirmed_near"
+        ],
+        "deadline_states": {
+          "port_storage": "near",
+          "combined_dd": "near"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "今天提柜，并核对还空柜安排"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C08",
+      "title": "两个期限超期，柜子只计一次",
+      "container_trip_ids": [
+        "T-08"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "ready",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked",
+          "ready_unappointed",
+          "confirmed_overdue"
+        ],
+        "deadline_states": {
+          "port_storage": "overdue",
+          "combined_dd": "overdue"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "优先安排提柜并确认延期与费用处理"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C09",
+      "title": "出闸结束堆存，运输仍在执行",
+      "container_trip_ids": [
+        "T-09"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "gate_out",
+        "readiness": "pickup_completed",
+        "dashboard_memberships": [],
+        "deadline_states": {
+          "port_storage": "ended_on_time",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "跟进到仓与签收"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C10",
+      "title": "仓库签收后仍需还空柜",
+      "container_trip_ids": [
+        "T-10"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "warehouse_signed",
+        "readiness": "pickup_completed",
+        "dashboard_memberships": [
+          "delivered_not_returned",
+          "confirmed_near"
+        ],
+        "deadline_states": {
+          "port_storage": "ended_on_time",
+          "combined_dd": "near"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "今天还至指定堆场并取得回单"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C11",
+      "title": "全部实际节点完整，可以关单",
+      "container_trip_ids": [
+        "T-11"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "empty_returned",
+        "readiness": "pickup_completed",
+        "dashboard_memberships": [],
+        "deadline_states": {
+          "port_storage": "ended_on_time",
+          "combined_dd": "ended_on_time"
+        },
+        "shipment_lifecycle": "close_eligible",
+        "next_action": "核对异常清零后人工关单"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C12",
+      "title": "同票三柜，一柜完成，两柜待办",
+      "container_trip_ids": [
+        "T-12A",
+        "T-12B",
+        "T-12C"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "actual_arrived_not_picked_ids": [
+          "T-12B",
+          "T-12C"
+        ],
+        "ready_unappointed_ids": [
+          "T-12B"
+        ],
+        "shipment_lifecycle": "open",
+        "next_action": "B柜预约，C柜处理查验，整票不关单"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C13",
+      "title": "可提但期限缺失，不能显示正常",
+      "container_trip_ids": [
+        "T-13"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "ready",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked",
+          "ready_unappointed",
+          "pending_confirmation"
+        ],
+        "deadline_states": {
+          "port_storage": "pending_confirmation",
+          "combined_dd": "pending_confirmation"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "补充经确认最后免费日，保留可提与待确认并行"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C14",
+      "title": "缺少海关结果，不能自动判可提",
+      "container_trip_ids": [
+        "T-14"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "pending_confirmation",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked",
+          "pending_confirmation"
+        ],
+        "deadline_states": {
+          "port_storage": "safe",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "获取海关放行确认和来源凭据"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C15",
+      "title": "重复导入同一实际卸船事件",
+      "container_trip_ids": [
+        "T-15"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "discharged",
+        "readiness": "ready",
+        "dashboard_memberships": [
+          "actual_arrived_not_picked",
+          "ready_unappointed"
+        ],
+        "deadline_states": {
+          "port_storage": "safe",
+          "combined_dd": "safe"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "同一来源事件重导保持幂等",
+        "duplicate_event_id": "EV-060",
+        "stored_discharge_event_count_after_reimport": 1
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C16",
+      "title": "ETA提前，不能取目标日期最大值",
+      "container_trip_ids": [
+        "T-16"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "expected": {
+        "physical_stage": "in_transit",
+        "readiness": "not_applicable",
+        "dashboard_memberships": [],
+        "deadline_states": {
+          "port_storage": "not_started",
+          "combined_dd": "not_started"
+        },
+        "shipment_lifecycle": "open",
+        "next_action": "核实船期，等待实际到港",
+        "current_eta": "2026-10-15T08:00:00+08:00"
+      },
+      "origin": "synthetic_expected_specification",
+      "acceptance_note": "ETA新旧版本在独立字段断言；下一步为业务动作，不使用要求开发者展示界面的说明"
+    },
+    {
+      "id": "C17",
+      "title": "最后免费日午夜边界",
+      "container_trip_ids": [
+        "T-07"
+      ],
+      "as_of": "2026-10-13T23:59:59+08:00",
+      "expected": {
+        "deadline_states": {
+          "port_storage": "near",
+          "combined_dd": "near"
+        }
+      },
+      "second_observation": {
+        "as_of": "2026-10-14T00:00:00+08:00",
+        "expected": {
+          "deadline_states": {
+            "port_storage": "overdue",
+            "combined_dd": "overdue"
+          }
+        }
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C18",
+      "title": "独立滞箱与合并免费期对比",
+      "container_trip_ids": [
+        "T-10"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "input_override": {
+        "remove_deadline_kind": "combined_dd",
+        "add_deadline": {
+          "kind": "detention",
+          "rule_id": "DEMO-SEPARATE-DETENTION-3-v1",
+          "start_milestone": "PORT_GATE_OUT",
+          "end_milestone": "EMPTY_RETURN",
+          "precision": "date",
+          "due_date": "2026-10-14",
+          "due_at": null,
+          "timezone": "Asia/Shanghai",
+          "basis_kind": "synthetic",
+          "evidence": "DEMO独立滞箱3日，自10月12日含首日起"
+        }
+      },
+      "expected": {
+        "deadline_states": {
+          "port_storage": "ended_on_time",
+          "detention": "near"
+        },
+        "combined_dd_absent": true,
+        "next_action": "按独立还柜期限10月14日执行，不套10月13日合并期限"
+      },
+      "origin": "synthetic_expected_specification"
+    },
+    {
+      "id": "C19",
+      "title": "节点完成但仍有未结异常",
+      "container_trip_ids": [
+        "T-11"
+      ],
+      "as_of": "2026-10-13T09:00:00+08:00",
+      "input_override": {
+        "add_open_exception": {
+          "id": "EX-11",
+          "type": "delivery_damage",
+          "owner": "演示跟进人A",
+          "next_action": "核实签收差异并记录处理结果",
+          "status": "open"
+        }
+      },
+      "expected": {
+        "physical_stage": "empty_returned",
+        "shipment_lifecycle": "open",
+        "next_action": "先处理异常，不能直接关单"
+      },
+      "origin": "synthetic_expected_specification"
+    }
+  ],
+  "execution_reference": "../tests/api-final.json"
+}

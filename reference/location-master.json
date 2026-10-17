@@ -1,0 +1,56 @@
+{
+  "version": "2025-1",
+  "source_url": "https://opensource.unicc.org/un/unece/uncefact/vocab-locode/-/jobs/artifacts/2025-1/download?job=package-release",
+  "archive_sha256": "ad409fc7149b10f98d61190c34d9daf78b78bb8b31464cc66de1a89d09b01b5d",
+  "records": [
+    {
+      "change": "",
+      "country": "CN",
+      "location": "NSA",
+      "name": "Nansha Pt",
+      "name_without_diacritics": "Nansha Pt",
+      "subdivision": "GD",
+      "function": "1-------",
+      "status": "AS",
+      "entry_date": "1407",
+      "iata": "",
+      "coordinates": "2245N 11335E",
+      "remarks": "",
+      "unlocode": "CNNSA",
+      "source_member": "release/csv/UNLOCODE CodeListPart1.csv"
+    },
+    {
+      "change": "",
+      "country": "CN",
+      "location": "SZX",
+      "name": "Shenzhen Baoan International Apt",
+      "name_without_diacritics": "Shenzhen Baoan International Apt",
+      "subdivision": "GD",
+      "function": "---45---",
+      "status": "AS",
+      "entry_date": "1601",
+      "iata": "",
+      "coordinates": "",
+      "remarks": "",
+      "unlocode": "CNSZX",
+      "source_member": "release/csv/UNLOCODE CodeListPart1.csv"
+    },
+    {
+      "change": "",
+      "country": "CN",
+      "location": "YTN",
+      "name": "Yantian Pt",
+      "name_without_diacritics": "Yantian Pt",
+      "subdivision": "GD",
+      "function": "123--6--",
+      "status": "AS",
+      "entry_date": "2407",
+      "iata": "",
+      "coordinates": "2236N 11418E",
+      "remarks": "coordinates",
+      "unlocode": "CNYTN",
+      "source_member": "release/csv/UNLOCODE CodeListPart1.csv"
+    }
+  ],
+  "note": "原始正式版名称Yantian Pt；港口时区Asia/Shanghai是本项目配置，非UN/LOCODE原字段。CNSZX为宝安机场，不能用作盐田海港。"
+}

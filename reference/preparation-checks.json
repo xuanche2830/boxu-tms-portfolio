@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "shipments": 16,
+    "container_trips": 18,
+    "events": 63,
+    "scenarios": 19,
+    "dictionary_fields": 90,
+    "mappings": 20,
+    "official_raw_events": 25
+  },
+  "checks": [
+    "主键及外键关联一致",
+    "每柜四项可提条件齐全",
+    "节点来源ID无重复",
+    "字段定义无重复",
+    "DCSA原始25条保持未改动",
+    "公开地点来源版本和压缩包SHA256已记录",
+    "19场景基准预期的指标明细数与业务规格一致",
+    "Excel已检查7张表的展示、读取关键区域，无公式错误",
+    "导出XLSX压缩内容完整，7张表无错误单元格"
+  ],
+  "limitations": [
+    "预期结果是编写的业务规格，尚未运行TMS应用验收",
+    "Excel内容为规格与输入模板，不自动刷新运输状态"
+  ]
+}

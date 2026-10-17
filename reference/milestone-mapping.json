@@ -1,0 +1,187 @@
+{
+  "version": "0.1",
+  "mapping": [
+    {
+      "external_category": "TRANSPORT",
+      "code": "ARRI",
+      "meaning": "运输工具抵达",
+      "internal_target": "VESSEL_ARRIVAL",
+      "guard": "mode=VESSEL；航次/运输调用/目的港和批次匹配。仅ACT更新实际到港；不是卸船。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SAMPLE"
+    },
+    {
+      "external_category": "TRANSPORT",
+      "code": "DEPA",
+      "meaning": "运输工具离开",
+      "internal_target": "VESSEL_DEPARTURE",
+      "guard": "mode=VESSEL；匹配航段。仅ACT更新实际离港。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SAMPLE"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "LOAD",
+      "meaning": "装上运输工具",
+      "internal_target": "LOADED",
+      "guard": "核对柜子、航段与空重；EMPTY装载不能作为载货进口卸船。",
+      "in_25_samples": true,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "DISC",
+      "meaning": "从运输工具卸下",
+      "internal_target": "DISCHARGED",
+      "guard": "ACT+LADEN+目的港+mode=VESSEL+非中转；缺少任一关键条件先待确认。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "GTOT",
+      "meaning": "设备出受控区域",
+      "internal_target": "PORT_GATE_OUT",
+      "guard": "ACT+LADEN+本次柜子+目的港进口码头；其他地点出闸不作为进口提柜。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "GTIN",
+      "meaning": "设备进入受控区域",
+      "internal_target": "EMPTY_RETURN",
+      "guard": "ACT+EMPTY+本次柜子+还柜指令指定设施；没有指定设施不判完成。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "CUSR",
+      "meaning": "海关放行",
+      "internal_target": "CUSTOMS_RELEASED",
+      "guard": "ACT+进口目的地+本次柜子+可信来源；仅更新customs，不替代carrier/terminal。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "AVPU",
+      "meaning": "设备可提",
+      "internal_target": "TERMINAL_AVAILABLE",
+      "guard": "ACT且来源确属目的码头可提信息，更新terminal；没有来源语义则待确认。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "CUSI/CUSS",
+      "meaning": "海关查验/扫描",
+      "internal_target": "CUSTOMS_HOLD",
+      "guard": "ACT+匹配柜子/目的进口流程。更新海关条件及异常；保留后续放行历史。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "SHIPMENT",
+      "code": "RECE",
+      "meaning": "单证收到",
+      "internal_target": "DOCUMENT_UPDATE",
+      "guard": "保留documentTypeCode与reference；不能仅据此判定海关或船公司放货。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SHIPMENT"
+    },
+    {
+      "external_category": "SHIPMENT",
+      "code": "DRFT",
+      "meaning": "单证草稿",
+      "internal_target": "DOCUMENT_UPDATE",
+      "guard": "保留documentTypeCode与reference；不能仅据此判定海关或船公司放货。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SHIPMENT"
+    },
+    {
+      "external_category": "SHIPMENT",
+      "code": "PENU",
+      "meaning": "等待补充单证",
+      "internal_target": "DOCUMENT_UPDATE",
+      "guard": "保留documentTypeCode与reference；不能仅据此判定海关或船公司放货。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SHIPMENT"
+    },
+    {
+      "external_category": "SHIPMENT",
+      "code": "APPR",
+      "meaning": "单证批准",
+      "internal_target": "DOCUMENT_UPDATE",
+      "guard": "保留documentTypeCode与reference；不能仅据此判定海关或船公司放货。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SHIPMENT"
+    },
+    {
+      "external_category": "SHIPMENT",
+      "code": "CONF",
+      "meaning": "单证确认",
+      "internal_target": "DOCUMENT_UPDATE",
+      "guard": "保留documentTypeCode与reference；不能仅据此判定海关或船公司放货。",
+      "in_25_samples": true,
+      "source_id": "DCSA_SHIPMENT"
+    },
+    {
+      "external_category": "SHIPMENT",
+      "code": "HOLD/RELS",
+      "meaning": "限制或解除限制",
+      "internal_target": "DOCUMENT_UPDATE",
+      "guard": "必须识别活动/单证类型和执行方，再对应独立条件。默认不自动更新放行。",
+      "in_25_samples": false,
+      "source_id": "DCSA_SHIPMENT"
+    },
+    {
+      "external_category": "EQUIPMENT",
+      "code": "DROP/PICK",
+      "meaning": "客户地点交接",
+      "internal_target": "UNMAPPED",
+      "guard": "保留原文；没有仓库、签收方和凭据，不推导WAREHOUSE_SIGNED。",
+      "in_25_samples": false,
+      "source_id": "DCSA_EQUIPMENT"
+    },
+    {
+      "external_category": "LOCAL",
+      "code": "WAREHOUSE_ARRIVAL",
+      "meaning": "实际到仓",
+      "internal_target": "WAREHOUSE_ARRIVAL",
+      "guard": "人工或授权来源确认，关联柜子、实际时间和凭据。",
+      "in_25_samples": false,
+      "source_id": "LOCAL_DESIGN"
+    },
+    {
+      "external_category": "LOCAL",
+      "code": "WAREHOUSE_SIGNED",
+      "meaning": "实际签收",
+      "internal_target": "WAREHOUSE_SIGNED",
+      "guard": "人工或授权来源确认，关联柜子、实际时间和凭据。",
+      "in_25_samples": false,
+      "source_id": "LOCAL_DESIGN"
+    },
+    {
+      "external_category": "LOCAL",
+      "code": "CARRIER_CLEAR",
+      "meaning": "确认船公司放货",
+      "internal_target": "release_condition.carrier",
+      "guard": "人工或授权来源确认，关联柜子、实际时间和凭据。",
+      "in_25_samples": false,
+      "source_id": "LOCAL_DESIGN"
+    },
+    {
+      "external_category": "LOCAL",
+      "code": "OTHER_CLEAR",
+      "meaning": "确认无其他提柜限制",
+      "internal_target": "release_condition.other_hold",
+      "guard": "人工或授权来源确认，关联柜子、实际时间和凭据。",
+      "in_25_samples": false,
+      "source_id": "LOCAL_DESIGN"
+    }
+  ],
+  "default": "任何未知代码保留原文并列入UNMAPPED，不丢弃也不猜测",
+  "version_note": "固定参考实现中的枚举，非宣称适配最新版DCSA全部字段；规则护栏为项目设计"
+}

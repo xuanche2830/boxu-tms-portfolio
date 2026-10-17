@@ -1,0 +1,63 @@
+{
+  "prepared_at": "2026-10-13T09:00:00+08:00",
+  "sources": [
+    {
+      "id": "DCSA_SAMPLE",
+      "kind": "official_simulated",
+      "url": "https://github.com/dcsaorg/DCSA-TNT/blob/af619ff6abefe1bf6d668cf88477c1c2ee20cd08/postman_collection.json",
+      "version": "af619ff6abefe1bf6d668cf88477c1c2ee20cd08",
+      "scope": "25条历史模拟事件，仅用于接口结构；原始地点可能不一致"
+    },
+    {
+      "id": "DCSA_EQUIPMENT",
+      "kind": "official_code",
+      "url": "https://github.com/dcsaorg/DCSA-TNT/blob/af619ff6abefe1bf6d668cf88477c1c2ee20cd08/tnt-transfer-obj/src/main/java/org/dcsa/tnt/transferobjects/enums/EquipmentEventTypeCode.java",
+      "version": "af619ff6abefe1bf6d668cf88477c1c2ee20cd08",
+      "scope": "设备事件枚举及含义"
+    },
+    {
+      "id": "DCSA_SHIPMENT",
+      "kind": "official_code",
+      "url": "https://github.com/dcsaorg/DCSA-TNT/blob/af619ff6abefe1bf6d668cf88477c1c2ee20cd08/tnt-transfer-obj/src/main/java/org/dcsa/tnt/transferobjects/enums/ShipmentEventTypeCode.java",
+      "version": "af619ff6abefe1bf6d668cf88477c1c2ee20cd08",
+      "scope": "单证/业务事件枚举及含义"
+    },
+    {
+      "id": "UNLOCODE",
+      "kind": "official_master",
+      "url": "https://opensource.unicc.org/un/unece/uncefact/vocab-locode/-/jobs/artifacts/2025-1/download?job=package-release",
+      "version": "2025-1",
+      "scope": "正式发布包中CN三个地点记录；Shenzhen Baoan机场与盐田港分别编码"
+    },
+    {
+      "id": "MAERSK_RULE",
+      "kind": "public_reference_rule",
+      "url": "https://www.maersk.com/~/media_sc9/maersk/local-information/files/asia-pacific/china/import/demurrage-and-detention/south-china-including-hong-kong-import-combined-dnd-port-storage-english-effective-jun-01-2025.pdf",
+      "version": "2025-06-01",
+      "scope": "第1页合并D&D、第2页盐田堆存、第3页日历日；不作实际合同或账单"
+    },
+    {
+      "id": "MAERSK_TERMS",
+      "kind": "public_terms",
+      "url": "https://terms.maersk.com/dnd",
+      "version": "reviewed 2026-10-13",
+      "scope": "堆存、滞港、滞箱、合并规则的起止事件"
+    },
+    {
+      "id": "LOCAL_DESIGN",
+      "kind": "proposed_design",
+      "url": null,
+      "version": "0.1",
+      "scope": "团队、负责人、提货任务、签收、异常闭环及预警口径"
+    },
+    {
+      "id": "DEMO",
+      "kind": "synthetic",
+      "url": null,
+      "version": "0.1",
+      "scope": "全部业务记录、人员、承运商、确认凭据及结果均为模拟"
+    }
+  ],
+  "unlocode_archive_sha256": "ad409fc7149b10f98d61190c34d9daf78b78bb8b31464cc66de1a89d09b01b5d",
+  "raw_sample_sha256": "1ca87e0f0b544eb93d848eaa9d848d9d89c0967f4f2f1934d84c059df091cb6e"
+}

@@ -1,0 +1,865 @@
+[
+  {
+    "metadata": {
+      "eventID": "41533e39-df30-45c8-8035-127c92f93f8f",
+      "eventCreatedDateTime": "2003-05-01T00:00:00Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2003-05-03T00:00:00Z",
+      "eventClassifierCode": "EST",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "transportEventTypeCode": "DEPA",
+      "delayReasonCode": "ANA",
+      "changeRemark": "Authorities not available",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-B",
+        "carrierServiceCode": "TNT1",
+        "universalServiceReference": "SR00033F",
+        "carrierExportVoyageNumber": "TNT1E",
+        "carrierImportVoyageNumber": "TNT1E",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "9321483",
+          "name": "Emma Maersk",
+          "flag": "DK",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "3065fd6c-f63e-4bcd-b028-937a640db5ba",
+      "eventCreatedDateTime": "2003-05-03T00:00:00Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2003-05-03T00:00:00Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "transportEventTypeCode": "DEPA",
+      "delayReasonCode": "ANA",
+      "changeRemark": "Authorities not available",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-B",
+        "carrierServiceCode": "TNT1",
+        "universalServiceReference": "SR00033F",
+        "carrierExportVoyageNumber": "TNT1E",
+        "carrierImportVoyageNumber": "TNT1E",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "9321483",
+          "name": "Emma Maersk",
+          "flag": "DK",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "0210bf51-3d8b-4c7e-8ef9-d143b401ad2f",
+      "eventCreatedDateTime": "2021-01-08T13:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2021-01-08T13:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "SHI",
+          "value": "SI_REF_4"
+        }
+      ],
+      "shipmentEventTypeCode": "RECE",
+      "documentTypeCode": "SHI",
+      "documentReference": "SI_REF_4"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "97eb7c09-571e-438f-8f65-ac6a29ba04e5",
+      "eventCreatedDateTime": "2021-01-08T13:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2021-01-08T13:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "cbrr-b83765166707812c8ff4"
+        }
+      ],
+      "shipmentEventTypeCode": "RECE",
+      "documentTypeCode": "CBR",
+      "documentReference": "cbrr-b83765166707812c8ff4"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "d7dde15f-5ddc-42ce-8103-9fa1c4da0bde",
+      "eventCreatedDateTime": "2021-01-08T13:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2021-01-08T13:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "BKG",
+          "value": "cbr-b83765166707812c8ff4"
+        }
+      ],
+      "shipmentEventTypeCode": "RECE",
+      "documentTypeCode": "BKG",
+      "documentReference": "cbr-b83765166707812c8ff4"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "8b654176-fe41-41fd-a457-a632d6811246",
+      "eventCreatedDateTime": "2021-01-08T13:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2021-01-08T13:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "SHI",
+          "value": "c144c6dff46b9fa67e65"
+        }
+      ],
+      "shipmentEventTypeCode": "RECE",
+      "documentTypeCode": "SHI",
+      "documentReference": "c144c6dff46b9fa67e65"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "576731c5-1aca-4e05-a279-bae1350b7961",
+      "eventCreatedDateTime": "2021-01-08T17:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2021-01-08T17:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "SHI",
+          "value": "SI_REF_4"
+        }
+      ],
+      "shipmentEventTypeCode": "PENU",
+      "documentTypeCode": "SHI",
+      "documentReference": "SI_REF_4",
+      "reason": "Carrier Booking Reference present in both shipping instruction as well as cargo items."
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "037bb03d-1310-4011-bc9b-3956b1e166bd",
+      "eventCreatedDateTime": "2021-01-08T18:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2021-01-08T18:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "SHI",
+          "value": "SI_REF_4"
+        }
+      ],
+      "shipmentEventTypeCode": "DRFT",
+      "documentTypeCode": "SHI",
+      "documentReference": "SI_REF_4"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "84db923d-2a19-4eb0-beb5-446c1ec17d34",
+      "eventCreatedDateTime": "2021-01-09T13:12:56Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2019-11-11T23:11:00Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "transportEventTypeCode": "ARRI",
+      "delayReasonCode": "WEA",
+      "changeRemark": "Bad weather",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-A",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "1234567",
+          "name": "King of the Seas",
+          "flag": "DE",
+          "callSign": "NCVV",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "2c645424-a125-4431-9dc4-5aff488173b7",
+      "eventCreatedDateTime": "2021-01-09T13:12:56Z",
+      "eventType": "EQUIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2019-11-11T23:11:00Z",
+      "eventClassifierCode": "EST",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "equipmentEventTypeCode": "LOAD",
+      "equipmentReference": "APZU4812090",
+      "emptyIndicatorCode": "EMPTY",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-A",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "1234567",
+          "name": "King of the Seas",
+          "flag": "DE",
+          "callSign": "NCVV",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      },
+      "isoequipmentCode": "22G2",
+      "isTransshipmentMove": false
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "2968b966-ee81-46ba-af87-0c5031c641f4",
+      "eventCreatedDateTime": "2021-11-28T13:12:56Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2021-11-30T23:11:00Z",
+      "eventClassifierCode": "PLN",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "a3a34f10-acc5-4e23-b52e-146f63458c90"
+        },
+        {
+          "type": "CBR",
+          "value": "ef223019-ff16-4870-be69-9dbaaaae9b11"
+        },
+        {
+          "type": "BKG",
+          "value": "C501576CD94F"
+        },
+        {
+          "type": "BKG",
+          "value": "DCR987876762"
+        }
+      ],
+      "transportEventTypeCode": "ARRI",
+      "delayReasonCode": "WEA",
+      "changeRemark": "Bad weather",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_04-A",
+        "carrierExportVoyageNumber": "2107E",
+        "carrierImportVoyageNumber": "2106W",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "DEHAM",
+          "locationName": "Hamburg",
+          "address": {
+            "name": "Lukas",
+            "street": "Rohrdamm",
+            "streetNumber": "81",
+            "floor": "5",
+            "postCode": "32108",
+            "city": "Bad Salzuflen Grastrup-hölsen",
+            "stateRegion": "Nordrhein-Westfalen",
+            "country": "Germany"
+          },
+          "facilityCode": "DPWJA",
+          "facilityCodeListProvider": "SMDG",
+          "latitude": "53.551° N",
+          "longitude": "9.9937° E"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "9321483",
+          "name": "Emma Maersk",
+          "flag": "DK",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "2968b966-ee81-46ba-af87-0c5031c641f3",
+      "eventCreatedDateTime": "2021-11-28T13:12:56Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2021-11-30T23:11:00Z",
+      "eventClassifierCode": "PLN",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_01"
+        },
+        {
+          "type": "BKG",
+          "value": "AR1239719871"
+        },
+        {
+          "type": "BKG",
+          "value": "BR1239719871"
+        },
+        {
+          "type": "SHI",
+          "value": "SI_REF_2"
+        },
+        {
+          "type": "SHI",
+          "value": "SI_REF_7"
+        },
+        {
+          "type": "TRD",
+          "value": "9b02401c-b2fb-5009"
+        }
+      ],
+      "references": [
+        {
+          "type": "CR",
+          "value": "AB-123743CR"
+        },
+        {
+          "type": "PO",
+          "value": "PO0027"
+        }
+      ],
+      "transportEventTypeCode": "DEPA",
+      "delayReasonCode": "WEA",
+      "changeRemark": "Bad weather",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_01-C",
+        "carrierExportVoyageNumber": "2419E",
+        "carrierImportVoyageNumber": "2418W",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "RAIL",
+        "location": {
+          "UNLocationCode": "USMIA",
+          "locationName": "Genneb"
+        },
+        "facilityTypeCode": "COFS"
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "2968b966-ee81-46ba-af87-0c5031c641f2",
+      "eventCreatedDateTime": "2021-11-28T13:12:56Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2021-11-30T23:11:00Z",
+      "eventClassifierCode": "PLN",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_01"
+        },
+        {
+          "type": "BKG",
+          "value": "AR1239719871"
+        },
+        {
+          "type": "BKG",
+          "value": "BR1239719871"
+        },
+        {
+          "type": "SHI",
+          "value": "SI_REF_2"
+        },
+        {
+          "type": "SHI",
+          "value": "SI_REF_7"
+        },
+        {
+          "type": "TRD",
+          "value": "9b02401c-b2fb-5009"
+        }
+      ],
+      "references": [
+        {
+          "type": "CR",
+          "value": "AB-123743CR"
+        },
+        {
+          "type": "PO",
+          "value": "PO0027"
+        }
+      ],
+      "transportEventTypeCode": "ARRI",
+      "delayReasonCode": "WEA",
+      "changeRemark": "Bad weather",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_01-D",
+        "carrierExportVoyageNumber": "3419E",
+        "carrierImportVoyageNumber": "3418W",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "RAIL",
+        "location": {
+          "UNLocationCode": "USMIA",
+          "locationName": "Nijmegen"
+        },
+        "facilityTypeCode": "INTE"
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "2968b966-ee81-46ba-af87-0c5031c64142",
+      "eventCreatedDateTime": "2021-11-28T13:12:56Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2021-11-30T23:11:00Z",
+      "eventClassifierCode": "PLN",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "transportEventTypeCode": "DEPA",
+      "delayReasonCode": "WEA",
+      "changeRemark": "Bad weather",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-A",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "1234567",
+          "name": "King of the Seas",
+          "flag": "DE",
+          "callSign": "NCVV",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "9d5d0824-b228-4ea8-b2cb-4ebd8da76e15",
+      "eventCreatedDateTime": "2021-11-29T13:12:56Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2021-12-02T23:11:00Z",
+      "eventClassifierCode": "PLN",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "a3a34f10-acc5-4e23-b52e-146f63458c90"
+        },
+        {
+          "type": "CBR",
+          "value": "ef223019-ff16-4870-be69-9dbaaaae9b11"
+        },
+        {
+          "type": "BKG",
+          "value": "C501576CD94F"
+        },
+        {
+          "type": "BKG",
+          "value": "DCR987876762"
+        }
+      ],
+      "transportEventTypeCode": "DEPA",
+      "delayReasonCode": "WEA",
+      "changeRemark": "Bad weather",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_04-B",
+        "carrierExportVoyageNumber": "2107E",
+        "carrierImportVoyageNumber": "2106W",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Lagkagehuset Islands Brygge",
+          "address": {
+            "name": "Lagkagehuset",
+            "street": "Islands Brygge",
+            "streetNumber": "43",
+            "floor": "St",
+            "postCode": "2300",
+            "city": "København S",
+            "stateRegion": "N/A",
+            "country": "Denmark"
+          },
+          "latitude": "55.6642249",
+          "longitude": "12.57341045"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "9321483",
+          "name": "Emma Maersk",
+          "flag": "DK",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "bad67dfa-a866-46bb-8889-b71c77d0f405",
+      "eventCreatedDateTime": "2021-11-30T23:11:00Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2021-11-28T13:12:56Z",
+      "eventClassifierCode": "PLN",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "transportEventTypeCode": "ARRI",
+      "delayReasonCode": "ANA",
+      "changeRemark": "Authorities not available",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-B",
+        "carrierServiceCode": "TNT1",
+        "universalServiceReference": "SR00033F",
+        "universalExportVoyageReference": "SR00034F",
+        "universalImportVoyageReference": "SR00035F",
+        "carrierExportVoyageNumber": "TNT1E",
+        "carrierImportVoyageNumber": "TNT1E",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "9321483",
+          "name": "Emma Maersk",
+          "flag": "DK",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "e73a828b-d6ed-4d78-9a25-ca60c62a72ec",
+      "eventCreatedDateTime": "2022-03-01T18:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2022-03-01T18:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "SHI",
+          "value": "SI_REF_6"
+        }
+      ],
+      "shipmentEventTypeCode": "RECE",
+      "documentTypeCode": "SHI",
+      "documentReference": "SI_REF_6"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "5d1c56f2-d851-4bc5-9c2a-fe794080001a",
+      "eventCreatedDateTime": "2022-03-03T18:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2022-03-03T18:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "TRD",
+          "value": "2b02401c-b2fb-5009"
+        }
+      ],
+      "shipmentEventTypeCode": "DRFT",
+      "documentTypeCode": "TRD",
+      "documentReference": "2b02401c-b2fb-5009"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "e17ab008-2286-46d9-8eb6-3607a5bacfe5",
+      "eventCreatedDateTime": "2022-03-03T18:22:53Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2022-03-03T18:22:53Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "SHI",
+          "value": "SI_REF_6"
+        }
+      ],
+      "shipmentEventTypeCode": "DRFT",
+      "documentTypeCode": "SHI",
+      "documentReference": "SI_REF_6"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "179919ae-1e90-41a8-be0d-baa7b9264035",
+      "eventCreatedDateTime": "2022-03-05T13:56:12Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2022-03-05T13:56:12Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "TRD",
+          "value": "2b02401c-b2fb-5009"
+        }
+      ],
+      "shipmentEventTypeCode": "APPR",
+      "documentTypeCode": "TRD",
+      "documentReference": "2b02401c-b2fb-5009"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "5e51e72c-d872-11ea-811c-0f8f10a32ea2",
+      "eventCreatedDateTime": "2023-04-18T05:56:23.871884Z",
+      "eventType": "EQUIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2003-05-03T00:00:00Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "equipmentEventTypeCode": "LOAD",
+      "equipmentReference": "equipref3453",
+      "emptyIndicatorCode": "EMPTY",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-A",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "1234567",
+          "name": "King of the Seas",
+          "flag": "DE",
+          "callSign": "NCVV",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      },
+      "isoequipmentCode": "22G2",
+      "isTransshipmentMove": false
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "5e51e72c-d872-11ea-811c-0f8f10a32ea1",
+      "eventCreatedDateTime": "2023-04-18T05:56:23.871884Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2003-05-03T00:00:00Z",
+      "eventClassifierCode": "ACT",
+      "shipmentEventTypeCode": "CONF",
+      "documentTypeCode": "BKG",
+      "documentReference": "ABC123123123"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "e48f2bc0-c746-11ea-a3ff-db48243a89f4",
+      "eventCreatedDateTime": "2023-04-18T05:56:23.871884Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2020-07-15T00:00:00Z",
+      "eventClassifierCode": "ACT",
+      "shipmentEventTypeCode": "APPR",
+      "documentTypeCode": "BKG",
+      "documentReference": "BR1239719971"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "784871e7-c9cd-4f59-8d88-2e033fa799a1",
+      "eventCreatedDateTime": "2023-04-18T05:56:23.871884Z",
+      "eventType": "SHIPMENT"
+    },
+    "payload": {
+      "eventDateTime": "2020-07-15T00:00:00Z",
+      "eventClassifierCode": "ACT",
+      "shipmentEventTypeCode": "APPR",
+      "documentTypeCode": "BKG",
+      "documentReference": "BR1239719971"
+    }
+  },
+  {
+    "metadata": {
+      "eventID": "5e51e72c-d872-11ea-811c-0f8f10a32ea3",
+      "eventCreatedDateTime": "2023-04-18T05:56:23.871884Z",
+      "eventType": "TRANSPORT"
+    },
+    "payload": {
+      "eventDateTime": "2003-05-03T00:00:00Z",
+      "eventClassifierCode": "ACT",
+      "relatedDocumentReferences": [
+        {
+          "type": "CBR",
+          "value": "CARRIER_BOOKING_REQUEST_REFERENCE_02"
+        },
+        {
+          "type": "BKG",
+          "value": "ABC123123123"
+        }
+      ],
+      "transportEventTypeCode": "DEPA",
+      "delayReasonCode": "ANA",
+      "changeRemark": "Authorities not available",
+      "transportCall": {
+        "transportCallReference": "TC-REF-08_02-A",
+        "transportCallSequenceNumber": 1,
+        "modeOfTransport": "VESSEL",
+        "location": {
+          "UNLocationCode": "USNYC",
+          "locationName": "Eiffel Tower",
+          "latitude": "48.8585500",
+          "longitude": "2.294492036"
+        },
+        "facilityTypeCode": "POTE",
+        "vessel": {
+          "vesselIMONumber": "1234567",
+          "name": "King of the Seas",
+          "flag": "DE",
+          "callSign": "NCVV",
+          "operatorCarrierCode": "MSK",
+          "operatorCarrierCodeListProvider": "SMDG"
+        }
+      }
+    }
+  }
+]
+

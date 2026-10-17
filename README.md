@@ -20,7 +20,9 @@
 
 ## 在本机试一遍
 
-演示版需要 **Windows 和 Python 3.12+**。首次安装依赖需要网络。仓库已包含编译好的前端页面，直接体验不需要安装 Node.js。
+只想体验的话，可从 [v0.12.1 预发行版](https://github.com/xuanche2830/boxu-tms-portfolio/releases/tag/v0.12.1) 下载 `Boxu-Demo-Windows-x64.exe`。它适用于 Windows x64，双击后会在本机启动合成演示并打开浏览器，不需要安装 Python。关闭程序窗口即可停止服务；练习资料保存在当前 Windows 用户的 `%LOCALAPPDATA%\BoxuTMS\demo`。运行限制和构建方法见 [Windows EXE 说明](docs/DESKTOP-EXE.md)。
+
+如果想从源码运行，需要 **Windows 和 Python 3.12+**。首次安装依赖需要网络。仓库已包含编译好的前端页面，直接体验不需要安装 Node.js。
 
 ```powershell
 python -m venv .venv
@@ -62,6 +64,7 @@ python -m venv .venv
 - [导航与账号设计](docs/NAVIGATION-v011.md)：不同角色从哪里进入，账号功能目前有哪些边界。
 - [架构说明](docs/ARCHITECTURE.md)与[凭证说明](docs/EVIDENCE-v011.md)：数据、权限、附件和备份如何连接。
 - [来源说明](THIRD_PARTY_NOTICES.md)：公开资料、第三方许可，以及 Taste、Impeccable 的设计参考。
+- [Windows EXE 说明](docs/DESKTOP-EXE.md)：下载后怎么启动、数据存在哪里、如何从源码重建。
 - `reference/`：早期海运到港提货模型，保留状态、期限和事件来源；目前的展示主线已转向企业项目物流协同。
 
 产品问题与业务流程由项目作者提出并逐轮验收，实现过程中使用 Codex 辅助编程。原创代码目前**仅供公开展示，未授予开源许可**；第三方资料仍按各自许可使用，详见 [LICENSE](LICENSE)。

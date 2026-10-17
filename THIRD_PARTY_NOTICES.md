@@ -7,5 +7,6 @@
 - 讨论到港期限时，参考了公开的 Maersk 条款与历史资料链接。它们不能替代当前合同或实时费用，也不是业务建议；仓库没有收录 PDF 正文。
 - 前端依赖 React、Vite、Lucide 等及 Python 包按各自许可证分发；版本固定在 `frontend/pnpm-lock.yaml` 和 `requirements.txt`。
 - 调整界面层级和信息密度时，参考了 [Taste](https://github.com/Leonxlnx/taste-skill) 和 [Impeccable](https://github.com/pbakaus/impeccable) 的公开设计方法。仓库没有收录这两个 skill 包，也没有做它们的完整检查。
+- Windows 演示程序使用 [PyInstaller 6.22.3](https://pyinstaller.org/en/v6.22.3/license.html) 打包。其 bootloader 采用 GPL-2.0-or-later 并附带打包分发例外；打包进去的 Python 依赖继续受各自许可证约束。
 
 本仓库根目录 `LICENSE` 只说明本项目原创部分的授权状态，不更改以上第三方权利。

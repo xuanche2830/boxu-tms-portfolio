@@ -28,7 +28,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts\serve.py --demo
 ```
 
-打开 **http://127.0.0.1:8769/collaboration**。演示空间首次运行会自动生成六种运输阶段的合成订单，顶部可切换企业负责人、项目员工、货代人员。练习数据保存在被忽略的 `data/demo/`，重启后保留。
+打开 `http://127.0.0.1:8769/collaboration`。演示空间首次运行会自动生成六种运输阶段的合成订单，顶部可切换企业负责人、项目员工、货代人员。练习数据保存在被忽略的 `data/demo/`，重启后保留。
 
 本机端口 8769 被占用时使用 `--port 8771`；想生成另一份全新演示资料，可加 `--fresh-demo`。新资料放在独立目录，不覆盖先前练习。用 `Ctrl+C` 停止当前服务。
 
@@ -40,7 +40,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts\serve.py --work
 ```
 
-工作空间默认在 **http://127.0.0.1:8768/collaboration**，首次由使用者设置负责人账号。它使用独立 `data/work/`；不要把工作库、日志或附件提交到公开仓库。服务只绑定本机回环地址。
+工作空间默认在 `http://127.0.0.1:8768/collaboration`，首次由使用者设置负责人账号。它使用独立 `data/work/`；不要把工作库、日志或附件提交到公开仓库。服务只绑定本机回环地址。
 
 ## 技术与验证
 

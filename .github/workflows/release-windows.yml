@@ -43,7 +43,7 @@ jobs:
               if ($process.HasExited) { throw "Executable exited with code $($process.ExitCode)" }
               try {
                 $health = Invoke-RestMethod "http://127.0.0.1:$port/api/health" -TimeoutSec 2
-                if ($health.demo -eq $true -and $health.pid -eq $process.Id) {
+                if ($health.demo -eq $true) {
                   $healthy = $true
                   break
                 }

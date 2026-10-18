@@ -19,6 +19,7 @@ from .db import DATA, ROOT, identifier, now
 from .domain import DomainError
 from .models import Audit
 from .project_models import PROJECT_TABLES, CommandReceipt, Project, Partner, ShippingRequest, TransportOrder
+from .version import APP_VERSION
 
 PREFIX = '/api/collab'
 PORT = int(os.environ.get('TMS_COLLAB_PORT', '8768'))
@@ -48,7 +49,7 @@ async def lifespan(app):
     yield
 
 
-app = FastAPI(title='泊序 · 协同试点', version='0.12.0', lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
+app = FastAPI(title='泊序 · 协同试点', version=APP_VERSION, lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 
 
 @app.middleware('http')
@@ -166,12 +167,15 @@ def whoami(session, account, login_record):
 @app.get('/api/health')
 def health():
     return {'application': 'harbor-tms-collaboration', 'version': app.version, 'pid': os.getpid(), 'demo': DEMO,
+            'desktop_instance': os.environ.get('TMS_DESKTOP_INSTANCE', '') if os.environ.get('TMS_DESKTOP_RUNTIME') == '1' else '',
             'instance': hashlib.sha256(str(ROOT.resolve()).casefold().encode()).hexdigest()[:16]}
 
 
 @app.get(PREFIX + '/status')
 def status(session: Session = Depends(connection)):
-    return {'setup_required': session.exec(select(User.id)).first() is None, 'version': app.version, 'demo': DEMO, 'demo_url': f'http://127.0.0.1:{DEMO_PORT}/collaboration#projects', 'work_url': f'http://127.0.0.1:{WORK_PORT}/collaboration#projects'}
+    return {'setup_required': session.exec(select(User.id)).first() is None, 'version': app.version, 'demo': DEMO,
+            'desktop': os.environ.get('TMS_DESKTOP_RUNTIME') == '1',
+            'demo_url': f'http://127.0.0.1:{DEMO_PORT}/collaboration#projects', 'work_url': f'http://127.0.0.1:{WORK_PORT}/collaboration#projects'}
 
 
 class DemoLogin(BaseModel):

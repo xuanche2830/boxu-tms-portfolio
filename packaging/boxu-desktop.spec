@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-"""Windows one-file build. Only synthetic demo resources are bundled."""
+"""Windows application. Business resources are public; user databases are never bundled."""
 
 from pathlib import Path
 
@@ -8,6 +8,7 @@ from PyInstaller.utils.hooks import collect_submodules
 
 ROOT = Path(SPECPATH).resolve().parent
 resources = [ROOT / 'web' / 'index.html']
+resources += [ROOT / 'docs' / 'QUICK-START.html', ROOT / 'LICENSE', ROOT / 'THIRD_PARTY_NOTICES.md']
 resources += [path for path in (ROOT / 'web' / 'assets').rglob('*') if path.is_file()]
 resources += [path for path in (ROOT / 'migrations').rglob('*.py') if '__pycache__' not in path.parts]
 resources += [ROOT / 'reference' / name for name in (
@@ -16,7 +17,7 @@ resources += [ROOT / 'reference' / name for name in (
 datas = [(str(path), str(path.parent.relative_to(ROOT))) for path in resources]
 
 analysis = Analysis(
-    [str(ROOT / 'scripts' / 'desktop_demo.py')],
+    [str(ROOT / 'scripts' / 'desktop_app.py')],
     pathex=[str(ROOT)],
     binaries=[],
     datas=datas,
@@ -27,7 +28,7 @@ analysis = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['pytest', 'psycopg', 'tkinter'],
+    excludes=['pytest', 'psycopg'],
     noarchive=False,
 )
 bundle = PYZ(analysis.pure)
@@ -37,10 +38,10 @@ exe = EXE(
     analysis.binaries,
     analysis.datas,
     [],
-    name='Boxu-Demo-Windows-x64',
+    name='Boxu-Windows-x64',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=False,
-    console=True,
+    console=False,
 )

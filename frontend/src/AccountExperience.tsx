@@ -21,7 +21,7 @@ export function LoginExperience({setup,space,error,busy,onSubmit,onDemo,onRetry}
       <button className="btn primary" disabled={busy}>{busy?'正在处理…':setup?'创建并进入企业空间':'登录'}<ArrowRight size={17}/></button>
     </form>{!setup&&<button className="co-login-help" aria-expanded={help} onClick={()=>setHelp(!help)}>无法登录或还没有账号？</button>}{help&&<div className="co-login-help-content"><strong>联系企业负责人核对账号</strong><p>请先检查账号拼写与键盘大小写。首次登录须更改初始密码；账号停用或未分配，需要负责人处理。</p><p>当前尚未提供自助找回密码。请不要把密码发送到聊天或备注中。</p></div>}
     </>}
-    {space.demo_url&&!space.demo&&<div className="co-login-demo"><span>先了解怎么使用</span><a href={space.demo_url} target="_blank" rel="noreferrer">进入独立演示空间<ArrowRight size={16}/></a><small>合成资料 · 无需工作账号 · 操作独立保存</small></div>}{space.demo&&<button className="btn secondary" onClick={onDemo} disabled={busy}>进入合成演示</button>}
+    {space.demo_url&&!space.demo&&!space.desktop&&<div className="co-login-demo"><span>先了解怎么使用</span><a href={space.demo_url} target="_blank" rel="noreferrer">进入独立演示空间<ArrowRight size={16}/></a><small>合成资料 · 无需工作账号 · 操作独立保存</small></div>}{space.desktop&&!space.demo&&<p className="co-login-note">演示与工作空间可在泊序启动窗口切换。</p>}{space.demo&&<button className="btn secondary" onClick={onDemo} disabled={busy}>进入合成演示</button>}
     {error&&<button className="pl-link" onClick={onRetry}>重新连接</button>}<p className="co-login-note">泊序 · 本机协同试点</p>
   </section></div>;
 }

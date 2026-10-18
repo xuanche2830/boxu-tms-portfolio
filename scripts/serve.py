@@ -1,6 +1,5 @@
 """Standard Python entry point. Always bind to loopback; never delete demo work."""
 import argparse
-import os
 from pathlib import Path
 import sys
 from uuid import uuid4
@@ -29,15 +28,9 @@ def main():
     data = ROOT / 'data' / ('demo' if demo else 'work')
     if args.fresh_demo:
         data = ROOT / 'data/demo-sessions' / uuid4().hex[:12]
-    os.environ['TMS_DATA_DIR'] = str(data)
-    os.environ['TMS_COLLAB_DEMO'] = '1' if demo else '0'
-    os.environ['TMS_COLLAB_PORT'] = str(port)
-    os.environ['TMS_COLLAB_DEMO_PORT'] = str(port if demo else 8769)
-    os.environ['TMS_COLLAB_WORK_PORT'] = str(8768 if demo else port)
-    os.environ['TMS_COLLAB_BACKUP_DIR'] = str(data / 'backups')
-    if demo:
-        os.environ.pop('TMS_COLLAB_DATABASE_URL', None)
     sys.path.insert(0, str(ROOT))
+    from scripts.desktop_runtime import configure_environment
+    configure_environment(data, 'demo' if demo else 'work', port, desktop=False)
     import uvicorn
     print(f'泊序 {"合成演示" if demo else "工作空间"}: http://127.0.0.1:{port}/collaboration', flush=True)
     print('仅本机可访问；Ctrl+C 停止。数据目录：' + str(data), flush=True)

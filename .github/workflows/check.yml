@@ -24,3 +24,4 @@ jobs:
       - run: pnpm build
         working-directory: frontend
       - run: python scripts/check.py all
+      - run: python scripts/check_desktop.py

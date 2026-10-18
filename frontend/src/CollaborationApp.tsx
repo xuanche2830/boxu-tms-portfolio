@@ -9,21 +9,15 @@ import './account-experience.css';
 import MemberManagement from './MemberManagement';
 import {LoginExperience,PasswordField,SectionHome,AccountHome} from './AccountExperience';
 
-type Row=Record<string, any>;
+import {request, type Identity, type SpaceStatus} from './collaboration-api';
 const roles:Record<string,string>={owner:'企业负责人',employee:'项目员工',partner:'货代人员'};
 
-async function request(path:string, init:RequestInit={}, identity?:Row|null) {
-  const response=await fetch('/api/collab'+path,{...init,credentials:'same-origin',headers:{'Content-Type':'application/json','X-TMS-Client':'collaboration-v1',...(identity?{'X-CSRF-Token':identity.csrf,'X-Expected-User':identity.user.id}:{}),...init.headers}});
-  if(!response.ok){const body=await response.json().catch(()=>({}));const error=new Error(typeof body.detail==='string'?body.detail:'请检查必填内容与字段格式') as Error&{status:number};error.status=response.status;throw error;}
-  return response.json();
-}
-
 export default function CollaborationApp(){
-  const [identity,setIdentity]=useState<Row|null>(null),[ready,setReady]=useState(false),[setup,setSetup]=useState(false);
+  const [identity,setIdentity]=useState<Identity|null>(null),[ready,setReady]=useState(false),[setup,setSetup]=useState(false);
   const [page,setPage]=useState(window.location.hash==='#access'?'access':window.location.hash==='#maintenance'?'maintenance':window.location.hash==='#imports'?'imports':'projects'),[error,setError]=useState(''),[busy,setBusy]=useState(false),[password,setPassword]=useState(false);
   const [route,setRoute]=useState(window.location.hash.slice(1)||'projects');
   const [accountNotice,setAccountNotice]=useState('');
-  const [space,setSpace]=useState<Row>({}),[navOpen,setNavOpen]=useState(false),[section,setSection]=useState('projects');
+  const [space,setSpace]=useState<SpaceStatus>({setup_required:false,version:'',demo:false,desktop:false,demo_url:'',work_url:''}),[navOpen,setNavOpen]=useState(false),[section,setSection]=useState('projects');
   useEffect(()=>{const update=()=>{
     let hash=window.location.hash.slice(1)||'projects';
     const legacy:Record<string,string>={access:'settings?section=members',maintenance:'settings?section=backup',imports:'resources?section=imports'};
@@ -33,16 +27,16 @@ export default function CollaborationApp(){
     setSection(params.get('order')?'orders':params.get('project')?'catalog':params.get('view')||'projects');
     window.scrollTo({top:0});setNavOpen(false);setPassword(false);
   };update();window.addEventListener('hashchange',update);return()=>window.removeEventListener('hashchange',update);},[]);
-  const identityRef=useRef<Row|null>(null); identityRef.current=identity;
-  const load=useCallback(async()=>{try{const status=await request('/status');setSpace(status);setSetup(status.setup_required);if(!status.setup_required){try{setIdentity(await request('/me'));}catch(e:any){if(e.status!==401)throw e;if(status.demo){setIdentity(await request('/demo-login',{method:'POST',body:JSON.stringify({role:'owner'})}));}else setIdentity(null);}}setError('');}catch(e:any){setError(e.message);}finally{setReady(true);}},[]);
+  const identityRef=useRef<Identity|null>(null); identityRef.current=identity;
+  const load=useCallback(async()=>{try{const status=await request<SpaceStatus>('/status');setSpace(status);setSetup(status.setup_required);if(!status.setup_required){try{setIdentity(await request<Identity>('/me'));}catch(e:any){if(e.status!==401)throw e;if(status.demo){setIdentity(await request<Identity>('/demo-login',{method:'POST',body:JSON.stringify({role:'owner'})}));}else setIdentity(null);}}setError('');}catch(e:any){setError(e.message);}finally{setReady(true);}},[]);
   useEffect(()=>{document.title='泊序 · 协同空间';load();},[load]);
   useEffect(()=>{if(!identity)return;
     if(page==='settings'&&identity.user.role!=='owner'||page==='resources'&&identity.user.role==='partner')window.location.hash='projects';
   },[identity?.user.id,page]);
-  useEffect(()=>{if(!identity)return;const verify=()=>{if(document.visibilityState==='visible')request('/me',{},identityRef.current).then(setIdentity).catch((e:any)=>{if(e.status===401){setIdentity(null);setError(e.message);}});};const timer=setInterval(verify,30000);window.addEventListener('focus',verify);return()=>{clearInterval(timer);window.removeEventListener('focus',verify);};},[identity?.user.id]);
-  const api=useCallback(async(path:string,init?:RequestInit)=>{try{return await request(path,init,identityRef.current);}catch(e:any){if(e.status===401){setIdentity(null);setError(e.message);}throw e;}},[]);
-  async function submitLogin(e:React.FormEvent<HTMLFormElement>){e.preventDefault();if(busy)return;setBusy(true);setError('');const data=Object.fromEntries(new FormData(e.currentTarget));try{const result=await request(setup?'/setup':'/login',{method:'POST',body:JSON.stringify(data)});setIdentity(result);setAccountNotice('');setSetup(false);setPage('projects');window.location.hash='projects';}catch(e:any){setError(e.message);}finally{setBusy(false);}}
-  async function runDemo(role:string){if(busy)return;setBusy(true);setError('');setAccountNotice('');try{setIdentity(await request('/demo-login',{method:'POST',body:JSON.stringify({role})}));window.location.hash='projects';setPassword(false);}catch(e:any){setError(e.message);}finally{setBusy(false);}}
+  useEffect(()=>{if(!identity)return;const verify=()=>{if(document.visibilityState==='visible')request<Identity>('/me',{},identityRef.current).then(setIdentity).catch((e:any)=>{if(e.status===401){setIdentity(null);setError(e.message);}});};const timer=setInterval(verify,30000);window.addEventListener('focus',verify);return()=>{clearInterval(timer);window.removeEventListener('focus',verify);};},[identity?.user.id]);
+  const api=useCallback(async(path:string,init?:RequestInit)=>{try{return await request<any>(path,init,identityRef.current);}catch(e:any){if(e.status===401){setIdentity(null);setError(e.message);}throw e;}},[]);
+  async function submitLogin(e:React.FormEvent<HTMLFormElement>){e.preventDefault();if(busy)return;setBusy(true);setError('');const data=Object.fromEntries(new FormData(e.currentTarget));try{const result=await request<Identity>(setup?'/setup':'/login',{method:'POST',body:JSON.stringify(data)});setIdentity(result);setAccountNotice('');setSetup(false);setPage('projects');window.location.hash='projects';}catch(e:any){setError(e.message);}finally{setBusy(false);}}
+  async function runDemo(role:string){if(busy)return;setBusy(true);setError('');setAccountNotice('');try{setIdentity(await request<Identity>('/demo-login',{method:'POST',body:JSON.stringify({role})}));window.location.hash='projects';setPassword(false);}catch(e:any){setError(e.message);}finally{setBusy(false);}}
   async function logout(){if(busy)return;setBusy(true);try{await api('/logout',{method:'POST',body:'{}'});setIdentity(null);setAccountNotice('');setPassword(false);setPage('projects');window.location.hash='projects';}catch(e:any){setError(e.message);}finally{setBusy(false);}}
   async function changePassword(e:React.FormEvent<HTMLFormElement>){e.preventDefault();if(busy)return;setBusy(true);setError('');const data=Object.fromEntries(new FormData(e.currentTarget));if(data.new_password!==data.confirm){setError('两次新密码不一致');setBusy(false);return;}delete data.confirm;try{setIdentity(await api('/password',{method:'POST',body:JSON.stringify(data)}));setPassword(false);setAccountNotice('密码已修改，其他已登录会话已失效。');window.location.hash='account';}catch(e:any){setError(e.message);}finally{setBusy(false);}}
   async function exportData(path:string,name:string){try{const data=await api(path);const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(e:any){setError(e.message);}}
@@ -62,14 +56,14 @@ export default function CollaborationApp(){
       </nav>
       <div className="co-sidebar-bottom">{identity.user.role==='owner'&&<button disabled={identity.user.must_change_password} className={'co-settings-link '+(inSettings?'active':'')} aria-current={inSettings?'page':undefined} onClick={()=>jump('settings')}><Settings size={18}/>企业设置</button>}
         <button className={'co-person co-account-link '+(page==='account'?'active':'')} disabled={identity.user.must_change_password} aria-label="打开个人账号" onClick={()=>{setPassword(false);jump('account');}}><span className="co-avatar" aria-hidden="true">{identity.user.display_name.slice(0,1)}</span><span><strong>{identity.user.display_name}</strong><span className="co-role">{roles[identity.user.role]}</span></span><ChevronRight size={16}/></button>
-        {!space.demo&&space.demo_url&&<a className="co-demo-entry" href={space.demo_url} target="_blank" rel="noreferrer">体验独立演示<ArrowRight size={16}/></a>}
+        {!space.desktop&&!space.demo&&space.demo_url&&<a className="co-demo-entry" href={space.demo_url} target="_blank" rel="noreferrer">体验独立演示<ArrowRight size={16}/></a>}
       </div>
     </aside><div className="co-work"><header className="co-top"><nav aria-label="当前位置" className="co-breadcrumb"><button onClick={()=>jump('projects')} disabled={identity.user.must_change_password}>工作空间</button><ChevronRight size={14}/>{(inSettings&&settingsSection||inResources&&(settingsSection||section==='partners'))&&<><button onClick={()=>jump(inSettings?'settings':'resources')}>{inSettings?'企业设置':'业务资料'}</button><ChevronRight size={14}/></>}<strong>{identity.user.must_change_password?'首次修改密码':password?'修改密码':title}</strong></nav><span><span className="co-connected"/>{roles[identity.user.role]} · 已登录</span></header>
     <main id="co-main" tabIndex={-1}>
-      {space.demo&&<section className="co-demo-banner"><div><strong>独立演示空间 · 全部为合成资料</strong><p>可练习运输与资料协作。操作只保存在演示库。</p></div><label>演示身份<select aria-label="演示身份" value={identity.user.role} disabled={busy} onChange={e=>runDemo(e.target.value)}>{Object.entries(roles).map(([key,value])=><option key={key} value={key}>{value}</option>)}</select></label><a href={space.work_url}>返回工作空间</a></section>}
+      {space.demo&&<section className="co-demo-banner"><div><strong>独立演示空间 · 全部为合成资料</strong><p>可练习运输与资料协作。操作只保存在演示库。</p></div><label>演示身份<select aria-label="演示身份" value={identity.user.role} disabled={busy} onChange={e=>runDemo(e.target.value)}>{Object.entries(roles).map(([key,value])=><option key={key} value={key}>{value}</option>)}</select></label>{space.desktop?<span>切换空间请回到泊序启动窗口</span>:<a href={space.work_url}>返回工作空间</a>}</section>}
       {error&&<div className="co-error" role="alert">{error}</div>}
       {page==='account'&&accountNotice&&!password&&<div className="pl-success" role="status">{accountNotice}<button className="pl-link" onClick={()=>setAccountNotice('')}>知道了</button></div>}
       {password||identity.user.must_change_password?passwordScreen:page==='account'?<AccountHome identity={identity} busy={busy} onPassword={()=>{setPassword(true);setError('');}} onLogout={logout}/>:inSettings&&identity.user.role==='owner'?(settingsSection==='members'?<MemberManagement api={api} route={route}/>:settingsSection==='backup'?<MaintenancePanel api={api}/>:<SectionHome kind="settings" owner/>):page==='resources'&&identity.user.role!=='partner'?(settingsSection==='imports'?<ImportPanel key={identity.user.id} api={api} role={identity.user.role}/>:<SectionHome kind="resources" owner={identity.user.role==='owner'}/>):<ProjectLogistics key={identity.user.id} api={api} mode={space.demo?"demo":"workspace"} onExport={exportData}/>}
-    </main><footer><span>泊序 v0.12 · 本机协同试点</span><span>仅显示当前账号获授权资料</span></footer></div>
+    </main><footer><span>泊序 v{space.version||'0.12'} · 本机协同试点</span><span>仅显示当前账号获授权资料</span></footer></div>
   </div>;
 }

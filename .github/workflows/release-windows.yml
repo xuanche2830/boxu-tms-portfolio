@@ -59,6 +59,12 @@ jobs:
             if (-not (Test-Path (Join-Path $env:TMS_DESKTOP_DEMO_DATA_DIR 'collaboration-demo.sqlite'))) {
               throw 'Synthetic database was not created'
             }
+          } catch {
+            Write-Output '--- Demo stdout ---'
+            if (Test-Path $stdout) { Get-Content -LiteralPath $stdout }
+            Write-Output '--- Demo stderr ---'
+            if (Test-Path $stderr) { Get-Content -LiteralPath $stderr }
+            throw
           } finally {
             Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
           }

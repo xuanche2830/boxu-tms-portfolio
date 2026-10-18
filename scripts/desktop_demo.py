@@ -14,6 +14,13 @@ from urllib.request import urlopen
 import webbrowser
 
 
+def configure_redirected_output() -> None:
+    # Windows may use cp1252 for redirected streams even when the UI is Chinese.
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and not stream.isatty() and hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8', errors='backslashreplace')
+
+
 def resource_root() -> Path:
     if getattr(sys, 'frozen', False):
         return Path(sys._MEIPASS)  # PyInstaller's bundled, read-only resources.
@@ -102,6 +109,7 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+    configure_redirected_output()
     try:
         main()
     except Exception as exc:

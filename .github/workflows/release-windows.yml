@@ -77,5 +77,5 @@ jobs:
             $assets += "$file.sha256"
           }
           $notes = 'docs/RELEASE-' + $env:RELEASE_TAG + '.md'
-          gh release create $env:RELEASE_TAG @assets --target $env:GITHUB_SHA --prerelease --latest=false --title "泊序 $env:RELEASE_TAG｜Windows 本地使用版" --notes-file $notes
+          gh release create $env:RELEASE_TAG @assets --target $env:GITHUB_SHA --prerelease --latest=false --title "泊序 ${env:RELEASE_TAG}｜Windows 本地使用版" --notes-file $notes
           if ($LASTEXITCODE -ne 0) { throw 'Release publication failed' }

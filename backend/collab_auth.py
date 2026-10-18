@@ -7,10 +7,14 @@ from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException
 from sqlalchemy import delete
 from sqlmodel import select
-from .db import identifier, now
+from .db import DATA, identifier, now
 from .collab_models import LoginAttempt, LoginSession, SecurityAudit, User
 
 COOKIE = 'tms_collab_demo_session' if os.environ.get('TMS_COLLAB_DEMO') == '1' else 'tms_collab_session'
+if os.environ.get('TMS_DESKTOP_RUNTIME') == '1':
+    # Cookies are scoped by host, not port. Keep desktop spaces independent of
+    # source services and of restored workspaces opened in the same browser.
+    COOKIE += '_' + hashlib.sha256(str(DATA.resolve()).casefold().encode()).hexdigest()[:12]
 ITERATIONS = 600_000
 
 

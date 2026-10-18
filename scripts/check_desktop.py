@@ -22,10 +22,10 @@ from scripts.desktop_runtime import APP_VERSION, stop_process
 
 
 class Client:
-    def __init__(self, base):
+    def __init__(self, base, cookies):
         self.base = base
         self.identity = None
-        self.opener = build_opener(HTTPCookieProcessor(http.cookiejar.CookieJar()))
+        self.opener = build_opener(HTTPCookieProcessor(cookies))
 
     def call(self, method, path, data=None, expected=200):
         headers = {'Content-Type': 'application/json', 'X-TMS-Client': 'collaboration-v1'}
@@ -67,6 +67,7 @@ def main():
         environment['PATH'] = str(Path(windows) / 'System32') + os.pathsep + windows
     processes = []
     checks = []
+    browser_cookies = http.cookiejar.CookieJar()
 
     def check(name, actual):
         if not actual:
@@ -104,7 +105,7 @@ def main():
                     check('release identity ' + mode, health['version'] == APP_VERSION)
                     with urlopen(base + '/collaboration', timeout=5) as response:
                         check('page available ' + mode, response.status == 200)
-                    return process, Client(base)
+                    return process, Client(base, browser_cookies)
             except (OSError, ValueError, KeyError):
                 pass
             time.sleep(0.3)
@@ -155,6 +156,9 @@ def main():
         restored.identity = restored.call('POST', '/login', credentials)
         check('restored owner and project retained', restored.call('GET', '/project-logistics')['projects'][0]['id'] == project['id'])
         check('demo remains independent', len(demo.call('GET', '/project-logistics')['orders']) == 6)
+        check('demo login survives work logins in one browser', demo.call('GET', '/me')['user']['role'] == 'partner')
+        _, original_reopened = start('work')
+        check('two workspaces retain separate browser sessions', bool(original_reopened.call('GET', '/me')['user']['id']))
 
         with socket.socket() as occupied:
             try:

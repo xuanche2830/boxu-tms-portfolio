@@ -1,11 +1,18 @@
 Copyright (c) 2026 xuanche2830. All rights reserved.
 
 本项目原创部分当前仅公开展示，暂未授予开源许可。
-除适用法律及托管平台条款所规定的权利外，未授予复制、修改、分发、
+作者允许从本仓库下载官方 Windows 发行包，在自己的电脑上运行本地演示与独立工作空间。
+这项运行许可不授予修改源码、再分发或对外提供商业托管服务的权利。
+除上述运行许可、适用法律及托管平台条款所规定的权利外，未授予复制、修改、分发、
 再许可或商业使用本项目原创部分的额外许可。需要其他授权请联系作者。
 
 The original portions of this project are published for portfolio viewing.
-No open-source license is granted at this time. Except for rights provided by
+Permission is granted to download official Windows release packages from this
+repository and run their local demo and independent workspace on your own computer.
+This runtime permission does not grant source modification, redistribution,
+or commercial hosting rights.
+No open-source license is granted at this time. Except for the runtime permission
+above and rights provided by
 applicable law and the hosting platform's terms, no additional permission to
 copy, modify, distribute, sublicense or commercially use those portions is granted.
 

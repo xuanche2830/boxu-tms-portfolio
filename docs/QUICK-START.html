@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>泊序 · 第一次使用</title>
+<style>
+  :root { color-scheme: light; font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif; color: #263c32; background: #f3f4f0; }
+  body { max-width: 850px; margin: 48px auto; padding: 0 24px 60px; line-height: 1.85; }
+  h1 { font-size: 38px; margin-bottom: 4px; } h2 { margin-top: 36px; font-size: 23px; }
+  .intro { font-size: 18px; color: #506257; } .box { background: white; border: 1px solid #d7e0d9; border-radius: 14px; padding: 20px 26px; margin: 24px 0; }
+  strong { color: #14573c; } code { overflow-wrap: anywhere; background: #eaf0e8; padding: 2px 5px; border-radius: 4px; }
+  li { padding: 5px 0; } a { color: #1b6f4e; } th, td { padding: 10px; border-bottom: 1px solid #d7e0d9; text-align: left; } table { border-collapse: collapse; width: 100%; }
+</style>
+<main>
+  <p>泊序 / 项目物流协同 / v0.12.2 预发行</p>
+  <h1>第一次使用，从这里开始。</h1>
+  <p class="intro">适用于 Windows x64。下载、解压、双击即可，不需要安装 Python、Node.js 或数据库。</p>
+  <div class="box"><ol>
+    <li>在 GitHub 的 Releases 下载 <strong>Boxu-Windows-x64.zip</strong>，右键选择“全部解压”。Code → Download ZIP 是开发源码，普通体验请下载发行使用包。</li>
+    <li>双击解压后的 <strong>Boxu-Windows-x64.exe</strong>，会出现泊序启动窗口。</li>
+    <li>点击<strong>打开演示</strong>，或点击<strong>打开我的空间</strong>建立自己的账号。</li>
+  </ol></div>
+  <h2>先体验一票货的完整流程</h2>
+  <p>“打开演示”会创建六种阶段的合成订单。页面顶部可以切换企业负责人、项目员工和货代。演示身份不需要登录密码。</p>
+  <ol>
+    <li>以负责人身份，在工作总览查看待接单、待发运、运输中、部分签收、全部签收和已关单。</li>
+    <li>切换货代身份，进入“我的运输”，打开待接单委托，确认接单，再确认发运并填写单号。</li>
+    <li>切换项目员工，打开同一票，登记签收；需要时记录异常，处理后留下结论。</li>
+    <li>负责人提出待补材料，货代上传合成文件，员工复核。材料上传与业务签收分别操作。</li>
+    <li>全部运输单元签收、异常处理完毕后，由企业人员关单。</li>
+  </ol>
+  <h2>建立自己的工作空间</h2>
+  <p>点击启动窗口的“打开我的空间”，再按页面提示完成首次设置。企业名称、姓名、账号和密码都由你自己填写。账号只接受英文字母、数字、下划线、点和短横线；密码至少 12 位。</p>
+  <p>首次进入是空白空间。在“项目与需求”创建项目；“业务资料”维护合作伙伴；进入项目登记发运需求并分配委托。成员和授权在“企业设置 → 成员与权限”。不同角色的流程与演示一致，数据由你自行维护。</p>
+  <p><strong>当前是本机原型。</strong>不同电脑各自保存资料；你创建的账号不能让另一台电脑远程连接。本版本没有承运商自动查件、飞书同步或忘记密码邮件。记好自己的负责人账号和密码。</p>
+  <h2>我的资料放在哪里？</h2>
+  <table><thead><tr><th>空间</th><th>Windows 当前用户目录</th></tr></thead><tbody>
+    <tr><td>演示练习</td><td><code>%LOCALAPPDATA%\BoxuTMS\demo</code></td></tr>
+    <tr><td>我的工作空间</td><td><code>%LOCALAPPDATA%\BoxuTMS\work</code></td></tr>
+  </tbody></table>
+  <p>点击启动窗口的“打开资料目录”即可找到。退出、重新启动或更换 EXE，资料仍保留在这里。不要在应用运行时手动移动数据库。</p>
+  <h2>备份、换电脑与升级</h2>
+  <ol>
+    <li>负责人进入“企业设置 → 数据与备份 → 创建本机备份”。在资料目录找到对应的 <code>.json.gz</code> 完整备份。</li>
+    <li>把备份单独存到你信任的位置。它包含账号验证资料、业务与附件，请按内部资料保管。</li>
+    <li>新电脑下载使用包后，先点启动窗口的<strong>从完整备份恢复</strong>，选择文件；再打开我的空间，用原账号密码登录。</li>
+    <li>已有业务资料的空间会拒绝覆盖；恢复时不要运行工作空间。原来的资料与备份都应保留。</li>
+    <li>升级前先备份、退出启动窗口，再运行新版本。数据库升级会保留升级前快照；降级恢复和公网部署目前不在图形入口中提供。</li>
+  </ol>
+  <h2>打不开时</h2>
+  <p>使用时保留泊序启动窗口；浏览器没有出现，可点击“再次打开页面”，或复制窗口显示的地址。默认端口被占用时程序会选择其他本机端口，不要依靠以前收藏的固定地址。</p>
+  <p>如果已提示启动失败，资料目录里的 <code>logs/application.log</code> 或 <code>startup-error.log</code> 可帮助定位问题。反馈前移除个人信息；不要把工作资料库、备份或密码上传到公开 Issue。</p>
+  <p>本程序尚未签名，Windows 或杀毒软件可能显示提示。请核对官方发行页和 SHA-256；如果设备策略阻止运行，可交由设备管理员评估。当前没有在所有 Windows 设备上完成兼容性验证。</p>
+  <p><a href="https://github.com/xuanche2830/boxu-tms-portfolio/releases">官方发行页</a> · <a href="https://github.com/xuanche2830/boxu-tms-portfolio">项目与已知限制</a></p>
+</main>
+</html>

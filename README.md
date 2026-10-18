@@ -4,7 +4,11 @@
 
 泊序是围绕这个问题做的本地演示原型：项目员工提出发运需求，企业分配运输委托，获授权的货代更新自己负责的票，企业再跟进签收、异常和凭证复核。每一步都能回到对应的项目和订单查看。
 
-**当前版本是 v0.12。截图以及预置的企业、人员、订单均为合成资料；尚未在真实企业或货代业务中上线。**
+**当前版本是 v0.12.2 预发行。截图以及预置的企业、人员、订单均为合成资料；尚未在真实企业或货代业务中上线。**
+
+**普通使用者：**从 [v0.12.2 发行页](https://github.com/xuanche2830/boxu-tms-portfolio/releases/tag/v0.12.2) 下载 **Boxu-Windows-x64.zip**，解压后双击 **Boxu-Windows-x64.exe**。不需要安装编程工具。启动窗口提供“打开演示”和“打开我的空间”，还可以从完整备份恢复到空白空间。包内的“先读我.html”写了第一次使用的步骤。
+
+当前使用包适用于 **Windows x64 本机试用**。每个人使用自己的账号和资料库；不同电脑的数据彼此独立。多人远程共同维护一份数据，还需要后续部署共享服务端。源码下载入口 Code → Download ZIP 面向开发者。
 
 ![泊序工作总览：待办、六阶段运输进度与项目交付](docs/images/overview.jpg)
 
@@ -20,7 +24,7 @@
 
 ## 在本机试一遍
 
-只想体验的话，可从 [v0.12.1 预发行版](https://github.com/xuanche2830/boxu-tms-portfolio/releases/tag/v0.12.1) 下载 `Boxu-Demo-Windows-x64.exe`。它适用于 Windows x64，双击后会在本机启动合成演示并打开浏览器，不需要安装 Python。关闭程序窗口即可停止服务；练习资料保存在当前 Windows 用户的 `%LOCALAPPDATA%\BoxuTMS\demo`。运行限制和构建方法见 [Windows EXE 说明](docs/DESKTOP-EXE.md)。
+使用包的演示练习保存在 `%LOCALAPPDATA%\BoxuTMS\demo`；自己的账号、项目和附件保存在 `%LOCALAPPDATA%\BoxuTMS\work`。两个空间互不混用，退出和升级后资料仍保留。使用期间保留启动窗口，关闭时会停止由该窗口启动的服务。详细步骤见 [第一次使用](docs/QUICK-START.html)，运行限制和构建方法见 [Windows EXE 说明](docs/DESKTOP-EXE.md)。
 
 如果想从源码运行，需要 **Windows 和 Python 3.12+**。首次安装依赖需要网络。仓库已包含编译好的前端页面，直接体验不需要安装 Node.js。
 
@@ -65,6 +69,7 @@ python -m venv .venv
 - [架构说明](docs/ARCHITECTURE.md)与[凭证说明](docs/EVIDENCE-v011.md)：数据、权限、附件和备份如何连接。
 - [来源说明](THIRD_PARTY_NOTICES.md)：公开资料、第三方许可，以及 Taste、Impeccable 的设计参考。
 - [Windows EXE 说明](docs/DESKTOP-EXE.md)：下载后怎么启动、数据存在哪里、如何从源码重建。
+- [工程接手与维护基线](docs/ENGINEERING.md)：功能台账、数据和权限、模块地图、技术债与发布验收。接手开发先读这份文件。
 - `reference/`：早期海运到港提货模型，保留状态、期限和事件来源；目前的展示主线已转向企业项目物流协同。
 
-产品问题与业务流程由项目作者提出并逐轮验收，实现过程中使用 Codex 辅助编程。原创代码目前**仅供公开展示，未授予开源许可**；第三方资料仍按各自许可使用，详见 [LICENSE](LICENSE)。
+产品问题与业务流程由项目作者提出并逐轮验收，实现过程中使用 Codex 辅助编程。官方 Windows 发行包允许下载到自己的电脑运行演示与独立工作空间；原创源码尚未授予开源许可。具体运行许可和保留权利见 [LICENSE](LICENSE)，第三方资料仍按各自许可使用。

@@ -1,85 +1,81 @@
-name: Package Windows demo release
+name: Package Windows local app
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag matching backend/version.py'
+        required: true
+        default: 'v0.12.2'
+        type: string
 
 permissions:
   contents: write
 
+concurrency:
+  group: windows-release
+  cancel-in-progress: false
+
 jobs:
   package:
     runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      RELEASE_TAG: ${{ inputs.release_tag }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '10.15.1'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Verify release identity
+        shell: pwsh
+        run: |
+          python -c "import os; from backend.version import APP_VERSION; assert os.environ['RELEASE_TAG'] == 'v' + APP_VERSION"
+          if ($LASTEXITCODE -ne 0) { throw 'Release tag does not match application version' }
       - name: Install packaging dependencies
         shell: pwsh
         run: |
           python -m venv .venv
           & .\.venv\Scripts\python.exe -m pip install -r requirements.txt PyInstaller==6.22.3
           if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed' }
-
-      - name: Build Windows executable
+      - run: pnpm install --frozen-lockfile
+        working-directory: frontend
+      - run: pnpm build
+        working-directory: frontend
+      - name: Check business flows
+        run: .\.venv\Scripts\python.exe scripts/check.py all
+      - name: Build Windows executable and user package
+        shell: pwsh
+        run: .\scripts\build_exe.ps1 -OutputDir "$env:RUNNER_TEMP\boxu-release"
+      - name: Check final executable outside the repository
         shell: pwsh
         run: |
-          .\scripts\build_exe.ps1 -OutputDir "$env:RUNNER_TEMP\boxu-release"
-          if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
-
-      - name: Check executable in an isolated demo space
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $exe = Join-Path $env:RUNNER_TEMP 'boxu-release\Boxu-Demo-Windows-x64.exe'
-          $env:TMS_DESKTOP_DEMO_DATA_DIR = Join-Path $env:RUNNER_TEMP 'boxu-smoke-data'
-          $port = 18773
-          $stdout = Join-Path $env:RUNNER_TEMP 'boxu-smoke-out.log'
-          $stderr = Join-Path $env:RUNNER_TEMP 'boxu-smoke-err.log'
-          $process = Start-Process -FilePath $exe -ArgumentList @('--no-browser', '--port', "$port") -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr
-          try {
-            $healthy = $false
-            for ($attempt = 0; $attempt -lt 120; $attempt++) {
-              if ($process.HasExited) { throw "Executable exited with code $($process.ExitCode)" }
-              try {
-                $health = Invoke-RestMethod "http://127.0.0.1:$port/api/health" -TimeoutSec 2
-                if ($health.demo -eq $true) {
-                  $healthy = $true
-                  break
-                }
-              } catch {
-                Start-Sleep -Milliseconds 500
-              }
-            }
-            if (-not $healthy) { throw 'Demo health check timed out' }
-            $page = Invoke-WebRequest "http://127.0.0.1:$port/collaboration" -UseBasicParsing -TimeoutSec 10
-            if ($page.StatusCode -ne 200) { throw 'Demo page did not respond' }
-            $status = Invoke-RestMethod "http://127.0.0.1:$port/api/collab/status" -TimeoutSec 10
-            if ($status.demo -ne $true -or $status.setup_required -ne $false) { throw 'Synthetic demo did not initialize' }
-            if (-not (Test-Path (Join-Path $env:TMS_DESKTOP_DEMO_DATA_DIR 'collaboration-demo.sqlite'))) {
-              throw 'Synthetic database was not created'
-            }
-          } catch {
-            Write-Output '--- Demo stdout ---'
-            if (Test-Path $stdout) { Get-Content -LiteralPath $stdout }
-            Write-Output '--- Demo stderr ---'
-            if (Test-Path $stderr) { Get-Content -LiteralPath $stderr }
-            throw
-          } finally {
-            Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
-          }
-
-      - name: Verify checksum and publish complete prerelease
+          & .\.venv\Scripts\python.exe scripts/check_desktop.py --executable "$env:RUNNER_TEMP\boxu-release\Boxu-Windows-x64.exe"
+          if ($LASTEXITCODE -ne 0) { throw 'Desktop delivery checks failed' }
+      - name: Publish complete prerelease
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           $ErrorActionPreference = 'Stop'
           $out = Join-Path $env:RUNNER_TEMP 'boxu-release'
-          $exe = Join-Path $out 'Boxu-Demo-Windows-x64.exe'
-          $checksum = "$exe.sha256"
-          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $exe).Hash.ToLowerInvariant()
-          $recorded = ((Get-Content -LiteralPath $checksum -Raw).Trim() -split '\s+')[0]
-          if ($actual -ne $recorded) { throw 'Checksum mismatch' }
-          gh release create v0.12.1 $exe $checksum --target $env:GITHUB_SHA --prerelease --latest=false --title '泊序 v0.12.1｜Windows 演示程序' --notes-file docs/RELEASE-v0.12.1.md
+          $assets = @()
+          foreach ($name in @('Boxu-Windows-x64.exe', 'Boxu-Windows-x64.zip')) {
+            $file = Join-Path $out $name
+            $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $file).Hash.ToLowerInvariant()
+            $recorded = ((Get-Content -LiteralPath "$file.sha256" -Raw).Trim() -split '\s+')[0]
+            if ($actual -ne $recorded) { throw 'Checksum mismatch' }
+            $assets += $file
+            $assets += "$file.sha256"
+          }
+          $notes = 'docs/RELEASE-' + $env:RELEASE_TAG + '.md'
+          gh release create $env:RELEASE_TAG @assets --target $env:GITHUB_SHA --prerelease --latest=false --title "泊序 $env:RELEASE_TAG｜Windows 本地使用版" --notes-file $notes
           if ($LASTEXITCODE -ne 0) { throw 'Release publication failed' }

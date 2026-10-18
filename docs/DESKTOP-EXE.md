@@ -25,4 +25,4 @@ python -m venv .venv
 
 生成的 EXE 和 SHA-256 文件位于仓库同级的 `release-build/`。构建内容包括前端页面、迁移文件、演示所需的公开规则资料、Python 代码、解释器与依赖；本机 `data/`、账号、数据库、附件与日志都不进入 EXE。
 
-本版只在构建所用的 Windows 11 x64 电脑上检查了启动、演示库初始化和页面响应；其他 Windows 版本、杀毒软件环境和代码签名后的表现尚未验证。也可直接按 [README](../README.md) 用 Python 运行源码。
+发行页上的 EXE 在 GitHub 托管的 Windows 环境完成打包，并通过启动、演示库初始化和页面响应检查。随后下载同一个发行文件到本地 Windows 11 x64，再次核对 SHA-256、启动和演示页。尚未在其他人的 Windows 设备、不同杀毒软件环境或代码签名后验证。也可直接按 [README](../README.md) 用 Python 运行源码。

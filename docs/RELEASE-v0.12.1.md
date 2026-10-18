@@ -4,6 +4,6 @@
 
 此程序仅用于体验项目物流协同流程，不需要另装 Python，也不会连接飞书、UPS 或 FedEx。它没有代码签名，首次打开时 Windows 可能出现安全提示。本版尚未在其他人的电脑上验证。
 
-下载页另附 `.sha256` 文件。可在 PowerShell 运行 `Get-FileHash .\Boxu-Demo-Windows-x64.exe -Algorithm SHA256`，将结果与文件中的哈希值核对。具体用法和已知限制见 [Windows EXE 说明](https://github.com/xuanche2830/boxu-tms-portfolio/blob/v0.12.1/docs/DESKTOP-EXE.md)。
+下载页另附 `.sha256` 文件。可在 PowerShell 运行 `Get-FileHash .\Boxu-Demo-Windows-x64.exe -Algorithm SHA256`，将结果与文件中的哈希值核对。具体用法和已知限制见 [Windows EXE 说明](https://github.com/xuanche2830/boxu-tms-portfolio/blob/main/docs/DESKTOP-EXE.md)。发行文件在 GitHub Windows 环境及本地 Windows 11 x64 完成了启动和页面检查。
 
 当前仍是预发行原型，尚未用于正式业务。演示里的企业、人员和订单均为合成资料。
